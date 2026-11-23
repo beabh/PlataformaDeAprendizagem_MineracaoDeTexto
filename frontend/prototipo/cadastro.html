@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar conta · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <a class="logo-area" href="index.html" aria-label="Início">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="bloco">
+      <div class="container" style="max-width:520px">
+        <p class="migalhas"><a href="index.html">Início</a> / Criar conta</p>
+        <h1 class="titulo-pagina">Criar conta</h1>
+        <p class="subtitulo">Cadastre-se com nome, e-mail e uma senha.</p>
+
+        <div class="card" style="display:grid; gap:1rem">
+          <form id="form-cadastro" style="display:grid; gap:1rem">
+            <div class="campo">
+              <label for="cad-nome">Nome</label>
+              <input id="cad-nome" name="nome" type="text" required minlength="2" maxlength="120" autocomplete="name" />
+            </div>
+            <div class="campo">
+              <label for="cad-email">E-mail</label>
+              <input id="cad-email" name="email" type="email" required maxlength="255" autocomplete="email" />
+            </div>
+            <div class="campo">
+              <label for="cad-senha">Senha</label>
+              <input id="cad-senha" name="senha" type="password" required minlength="8" maxlength="128" autocomplete="new-password" aria-describedby="ajuda-senha" />
+              <small id="ajuda-senha">Use pelo menos 8 caracteres.</small>
+            </div>
+            <div class="campo">
+              <label for="cad-confirmar">Confirmar senha</label>
+              <input id="cad-confirmar" name="confirmar" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+            </div>
+            <p id="aviso-cadastro" role="alert" hidden style="margin:0; color:#b00020"></p>
+            <button class="btn btn-escuro" type="submit">Criar conta</button>
+          </form>
+          <p style="margin:0; font-size:.9rem">
+            Seu nome e e-mail são guardados cifrados, e sua senha só é guardada como um código irreversível.
+          </p>
+          <p style="margin:0; font-size:.9rem">Já tem conta? <a href="login.html">Entrar</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="rodape-base">Protótipo de interface · Política de privacidade a elaborar conforme a LGPD.</p>
+    </div>
+  </footer>
+
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

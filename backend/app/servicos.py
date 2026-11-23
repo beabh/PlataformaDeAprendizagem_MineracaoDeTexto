@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from cryptography.fernet import Fernet
+from . import cifra
 from sqlalchemy import func, select
 
 from . import regras
@@ -480,7 +480,7 @@ def classificacao(db, usuario: Usuario) -> dict:
                 marco = marco or m.criado_em
             else:
                 marco = None
-        linhas.append({"id": u.id, "nome": _abreviar(u.nome_exibicao or u.nome_google), "total": total,
+        linhas.append({"id": u.id, "nome": _abreviar(u.nome_exibicao or u.nome), "total": total,
                        "aulas": int(aulas.get(u.id, 0)), "provas": int(provas.get(u.id, 0)),
                        "marco": marco or datetime.min.replace(tzinfo=FUSO), "eu": u.id == usuario.id})
     linhas.sort(key=lambda x: (-x["total"], x["marco"], x["id"]))
@@ -523,7 +523,7 @@ def status_certificado(db, usuario: Usuario) -> dict:
             "nome": usuario.nome_certificado or "", "email": usuario.email_certificado or ""}
 
 
-def emitir_certificado(db, usuario: Usuario, nome: str, email: str, cpf: str, chave_cpf: str) -> dict:
+def emitir_certificado(db, usuario: Usuario, nome: str, email: str, cpf: str) -> dict:
     nome = (nome or "").strip()
     email = (email or "").strip()
     if not (3 <= len(nome) <= 120):
@@ -539,7 +539,7 @@ def emitir_certificado(db, usuario: Usuario, nome: str, email: str, cpf: str, ch
     agora = datetime.now(FUSO)
     usuario.nome_certificado = nome
     usuario.email_certificado = email
-    usuario.cpf_cifrado = Fernet(chave_cpf.encode()).encrypt(regras.cpf_somente_digitos(cpf).encode()).decode()
+    usuario.cpf_cifrado = cifra.cifrar(regras.cpf_somente_digitos(cpf))
     db.commit()
     codigo = hashlib.sha256(f"{usuario.id}|{nome}|{agora.isoformat()}".encode()).hexdigest()[:12].upper()
     return {"nome": nome, "email": email, "cpf": regras.cpf_mascarado(cpf), "instituicao": INSTITUICAO,
@@ -550,7 +550,7 @@ def exportar_dados(db, usuario: Usuario) -> dict:
     """Cópia dos dados do estudante (LGPD: direito de acesso). Sem o CPF em texto."""
     uid = usuario.id
     return {
-        "usuario": {"email": usuario.email, "nome_google": usuario.nome_google,
+        "usuario": {"email": usuario.email, "nome": usuario.nome,
                     "nome_exibicao": usuario.nome_exibicao, "curso": usuario.curso,
                     "meta_minutos": usuario.meta_minutos, "cpf_cadastrado": usuario.cpf_cifrado is not None},
         "movimentos_pontos": [{"tipo": m.tipo, "pontos": m.pontos, "motivo": m.motivo, "saldo_apos": m.saldo_apos,
@@ -568,9 +568,10 @@ def exportar_dados(db, usuario: Usuario) -> dict:
 def excluir_conta(db, usuario: Usuario) -> None:
     """Remove os dados pessoais e mantém os resultados sem identificação (estatística da disciplina)."""
     usuario.anonimizado = True
-    usuario.google_sub = None
     usuario.email = f"removido-{usuario.id}@anonimizado.invalido"
-    usuario.nome_google = "Anônimo"
+    usuario.email_busca = f"removido-{usuario.id}"
+    usuario.senha_hash = None
+    usuario.nome = "Anônimo"
     usuario.nome_exibicao = None
     usuario.curso = None
     usuario.nome_certificado = None

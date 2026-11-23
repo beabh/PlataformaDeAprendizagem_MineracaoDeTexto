@@ -69,7 +69,7 @@ async function resolverPendente(dom, ordem, preencher) {
 
   // ---------- Login e menu ----------
   const dl = await abrir('login.html', null);
-  ok(dl.window.document.querySelector('form[action="/auth/desenvolvimento"]'), 'login: formulário de simulação aponta para a entrada de teste');
+  ok(dl.window.document.getElementById('form-entrar'), 'login: formulário de entrada com e-mail e senha');
 
   const ana = await cookieDe(EMAIL, 'Ana Paula Souza');
   let d = await abrir('trilha.html', ana);
@@ -175,6 +175,20 @@ async function resolverPendente(dom, ordem, preencher) {
   ok(docC.getElementById('estado-cert').textContent.includes('Para solicitar o certificado'), 'certificado: lista o que falta');
   ok(docC.getElementById('estado-cert').textContent.includes('Concluir todas as aulas do módulo 2'), 'certificado: cita as aulas que faltam');
   ok(docC.querySelector('#form-certificado button[type="submit"]').disabled, 'certificado: botão desabilitado enquanto faltar etapa');
+
+  // ---------- Cadastro (tela) ----------
+  d = await abrir('cadastro.html', null);
+  const docCad = d.window.document;
+  docCad.getElementById('cad-nome').value = 'Dora Melo';
+  docCad.getElementById('cad-email').value = EMAIL;
+  docCad.getElementById('cad-senha').value = 'senha-forte-1';
+  docCad.getElementById('cad-confirmar').value = 'outra-senha-2';
+  docCad.getElementById('form-cadastro').dispatchEvent(new d.window.Event('submit', { cancelable: true, bubbles: true }));
+  ok(docCad.getElementById('aviso-cadastro').textContent.includes('não conferem'), 'cadastro: senhas diferentes são recusadas na tela');
+  docCad.getElementById('cad-confirmar').value = 'senha-forte-1';
+  docCad.getElementById('form-cadastro').dispatchEvent(new d.window.Event('submit', { cancelable: true, bubbles: true }));
+  await esperar(d, (doc) => !doc.getElementById('aviso-cadastro').hidden);
+  ok(d.window.document.getElementById('aviso-cadastro').textContent.includes('Já existe uma conta'), 'cadastro: e-mail já usado mostra a mensagem do servidor');
 
   // ---------- Sem erros de script ----------
   ok(erros.length === 0, 'nenhum erro de script nas telas' + (erros.length ? ': ' + erros.join(' | ') : ''));

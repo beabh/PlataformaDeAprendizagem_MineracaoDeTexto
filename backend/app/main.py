@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
+from . import cifra
 from . import catalogo, rotas, rotas_auth
 from .banco import Base, criar_fabrica
 from .config import Configuracao
@@ -31,6 +32,7 @@ def criar_app(cfg: Configuracao | None = None, fabrica=None, criar_tabelas: bool
         engine, fabrica = criar_fabrica(cfg.database_url)
     app = FastAPI(title="Plataforma de Mineração de Texto e PLN", version="0.2.0")
     app.state.config = cfg
+    cifra.configurar(cfg.chave_cripto)
     app.state.fabrica = fabrica
 
     app.add_middleware(SessionMiddleware, secret_key=cfg.segredo_sessao, session_cookie="pln_sessao",

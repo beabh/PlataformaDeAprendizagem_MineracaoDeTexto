@@ -15,7 +15,7 @@ CHAVE = Fernet.generate_key().decode()
 
 def configuracao() -> Configuracao:
     return Configuracao(database_url=URL_TESTE, segredo_sessao="teste-segredo", ambiente="desenvolvimento",
-                        chave_cpf=CHAVE, turma_padrao="TURMA-TESTE")
+                        chave_cripto=CHAVE, turma_padrao="TURMA-TESTE")
 
 
 @pytest.fixture

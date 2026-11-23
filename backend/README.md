@@ -11,18 +11,21 @@ Requisitos: Python 3.11+ e PostgreSQL 14+.
 ```bash
 cd backend
 python3 -m venv .venv && ./.venv/bin/pip install -r requirements.txt
-createdb plataforma_pln                       # ou crie o banco pelo seu cliente
 cp .env.example .env                          # ajuste PLN_DATABASE_URL se preciso
 ./.venv/bin/uvicorn app.main:criar_app --factory --reload --port 8000
 ```
 
 No Windows (Git Bash), troque `./.venv/bin/` por `./.venv/Scripts/`. O servidor lê `backend/.env` sozinho; variáveis já definidas no sistema têm prioridade.
 
-Abra http://localhost:8000/ e use a tela **Entrar (simulação)** (só existe em `PLN_AMBIENTE=desenvolvimento`):
+Abra http://localhost:8000/, clique em **Criar conta** e depois entre com o e-mail e a senha. O padrão é SQLite (um arquivo `plataforma.db` na pasta `backend`), então não precisa instalar banco de dados.
+
+Os testes automatizados usam `/auth/desenvolvimento?email=...`, uma entrada sem senha que só existe em `PLN_AMBIENTE=desenvolvimento`.
 `/auth/desenvolvimento?email=seu@email.dev&nome=Seu%20Nome`.
 
 Na primeira execução, as tabelas são criadas e o catálogo (módulos, aulas, exercícios e provas)
 é carregado a partir de `dados/*.json`.
+
+> **Atenção:** as tabelas mudaram nesta versão. Se você já criou o banco antes, apague o arquivo `plataforma.db` (ou recrie o banco PostgreSQL). As tabelas antigas não são atualizadas sozinhas, e os dados que já estavam lá não são migrados.
 
 ## Testes
 

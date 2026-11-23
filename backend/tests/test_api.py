@@ -2,6 +2,7 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from app import cifra
 from app.modelos import Aula, ConclusaoAula, Modulo, MovimentoPontos, ProvaTentativa, Usuario
 from tests.conftest import delete, novo_cliente, post, put
 
@@ -170,8 +171,8 @@ def test_desempate_favorece_quem_chegou_antes(app, app_db):
     a = novo_cliente(app, "a.empate@teste.dev", "Aline Costa")
     b = novo_cliente(app, "b.empate@teste.dev", "Bruno Dias")
     with fabrica() as db:
-        ua = db.query(Usuario).filter_by(email="a.empate@teste.dev").one()
-        ub = db.query(Usuario).filter_by(email="b.empate@teste.dev").one()
+        ua = db.query(Usuario).filter_by(email_busca=cifra.codigo_busca("a.empate@teste.dev")).one()
+        ub = db.query(Usuario).filter_by(email_busca=cifra.codigo_busca("b.empate@teste.dev")).one()
         t0 = datetime(2026, 11, 1, 10, tzinfo=timezone.utc)
         # B chega a 10 antes; A chega a 10 depois. Mesmo total: B fica à frente.
         db.add(MovimentoPontos(usuario_id=ub.id, tipo="ganho", pontos=10, referencia="x#1", motivo="m",
@@ -207,7 +208,7 @@ def test_certificado_so_depois_de_tudo_e_cifra_o_cpf(app, app_db):
 
     # Simula a conclusão de todo o programa (o conteúdo ainda não tem exercícios para a maior parte das aulas)
     with fabrica() as db:
-        u = db.query(Usuario).filter_by(email="cert@teste.dev").one()
+        u = db.query(Usuario).filter_by(email_busca=cifra.codigo_busca("cert@teste.dev")).one()
         for aula in db.query(Aula).all():
             db.add(ConclusaoAula(usuario_id=u.id, aula_codigo=aula.codigo))
         for modulo in db.query(Modulo).filter_by(tem_prova=True).all():
@@ -221,7 +222,7 @@ def test_certificado_so_depois_de_tudo_e_cifra_o_cpf(app, app_db):
     assert dados["cpf"] == "***.982.247-**"
     assert dados["instituicao"] == "Centro Universitário de Lins – UNILINS"
     with fabrica() as db:
-        u = db.query(Usuario).filter_by(email="cert@teste.dev").one()
+        u = db.query(Usuario).filter_by(email_busca=cifra.codigo_busca("cert@teste.dev")).one()
         assert u.cpf_cifrado and "52998224725" not in u.cpf_cifrado
 
     exportado = c.get("/api/me/exportar").text
@@ -243,7 +244,7 @@ def test_excluir_conta_anonimiza_e_encerra_sessao(app, app_db):
     assert c.get("/api/trilha").status_code == 401
     with fabrica() as db:
         u = db.query(Usuario).filter_by(anonimizado=True).one()
-        assert u.email.endswith("@anonimizado.invalido") and u.nome_google == "Anônimo"
+        assert u.email.endswith("@anonimizado.invalido") and u.nome == "Anônimo"
         assert db.query(MovimentoPontos).filter_by(usuario_id=u.id).count() == 1  # resultado preservado
 
 

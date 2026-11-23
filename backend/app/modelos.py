@@ -1,6 +1,7 @@
 """Tabelas do banco. Descrição em docs/backend-simples.md (seção 1)."""
 from datetime import datetime
 
+from .cifra import CifradoTexto
 from sqlalchemy import JSON, Boolean, DateTime, ForeignKey, Integer, String, Text, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -17,15 +18,16 @@ class Turma(Base):
 class Usuario(Base):
     __tablename__ = "usuario"
     id: Mapped[int] = mapped_column(primary_key=True)
-    google_sub: Mapped[str | None] = mapped_column(String(255), unique=True)
-    email: Mapped[str] = mapped_column(String(255), unique=True)
-    nome_google: Mapped[str] = mapped_column(String(120))
-    nome_exibicao: Mapped[str | None] = mapped_column(String(60))
+    email: Mapped[str] = mapped_column(CifradoTexto())
+    email_busca: Mapped[str] = mapped_column(String(64), unique=True)
+    senha_hash: Mapped[str | None] = mapped_column(String(255))
+    nome: Mapped[str] = mapped_column(CifradoTexto())
+    nome_exibicao: Mapped[str | None] = mapped_column(CifradoTexto())
     curso: Mapped[str | None] = mapped_column(String(80))
     meta_minutos: Mapped[int] = mapped_column(Integer, default=15)
     # Dados do certificado: só existem depois que o estudante pede o certificado.
-    nome_certificado: Mapped[str | None] = mapped_column(String(120))
-    email_certificado: Mapped[str | None] = mapped_column(String(255))
+    nome_certificado: Mapped[str | None] = mapped_column(CifradoTexto())
+    email_certificado: Mapped[str | None] = mapped_column(CifradoTexto())
     cpf_cifrado: Mapped[str | None] = mapped_column(Text)
     turma_id: Mapped[int | None] = mapped_column(ForeignKey("turma.id"))
     anonimizado: Mapped[bool] = mapped_column(Boolean, default=False)
