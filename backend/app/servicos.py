@@ -21,7 +21,6 @@ from .modelos import (
 )
 
 FUSO = ZoneInfo("America/Sao_Paulo")
-INSTITUICAO = "Centro Universitário de Lins – UNILINS"
 
 
 # ---------- Situação do estudante (liberação em sequência) ----------
@@ -523,7 +522,7 @@ def status_certificado(db, usuario: Usuario) -> dict:
             "nome": usuario.nome_certificado or "", "email": usuario.email_certificado or ""}
 
 
-def emitir_certificado(db, usuario: Usuario, nome: str, email: str, cpf: str) -> dict:
+def emitir_certificado(db, usuario: Usuario, nome: str, email: str, cpf: str, instituicao: str) -> dict:
     nome = (nome or "").strip()
     email = (email or "").strip()
     if not (3 <= len(nome) <= 120):
@@ -542,7 +541,7 @@ def emitir_certificado(db, usuario: Usuario, nome: str, email: str, cpf: str) ->
     usuario.cpf_cifrado = cifra.cifrar(regras.cpf_somente_digitos(cpf))
     db.commit()
     codigo = hashlib.sha256(f"{usuario.id}|{nome}|{agora.isoformat()}".encode()).hexdigest()[:12].upper()
-    return {"nome": nome, "email": email, "cpf": regras.cpf_mascarado(cpf), "instituicao": INSTITUICAO,
+    return {"nome": nome, "email": email, "cpf": regras.cpf_mascarado(cpf), "instituicao": instituicao,
             "emitido_em": agora.isoformat(), "codigo_verificacao": codigo}
 
 

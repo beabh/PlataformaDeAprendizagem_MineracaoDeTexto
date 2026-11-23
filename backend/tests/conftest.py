@@ -15,7 +15,8 @@ CHAVE = Fernet.generate_key().decode()
 
 def configuracao() -> Configuracao:
     return Configuracao(database_url=URL_TESTE, segredo_sessao="teste-segredo", ambiente="desenvolvimento",
-                        chave_cripto=CHAVE, turma_padrao="TURMA-TESTE")
+                        chave_cripto=CHAVE, turma_padrao="TURMA-TESTE", pasta_correio=None,
+                        instituicao="Instituição de teste")
 
 
 @pytest.fixture
@@ -52,3 +53,12 @@ def delete(cliente, url):
 @pytest.fixture
 def app(app_db):
     return app_db[0]
+
+
+@pytest.fixture(autouse=True)
+def _zerar_limites_e_correio():
+    """Cada teste começa sem tentativas registradas e com a caixa de e-mails vazia."""
+    from app import correio, limitador
+    limitador.limpar()
+    correio.ENVIADOS.clear()
+    yield

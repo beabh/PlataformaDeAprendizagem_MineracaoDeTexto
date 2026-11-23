@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.get("/me")
 def me(usuario: Usuario = Depends(usuario_atual)):
-    return {"nome": usuario.nome_exibicao or usuario.nome, "email": usuario.email,
+    return {"nome": usuario.nome_exibicao or usuario.nome, "id": usuario.id, "email": usuario.email, "perfil": usuario.perfil, "email_verificado": usuario.email_verificado,
             "turma_id": usuario.turma_id}
 
 
@@ -86,7 +86,8 @@ def status_certificado(db=Depends(get_db), usuario: Usuario = Depends(usuario_at
 @router.post("/certificado")
 def emitir_certificado(dados: DadosCertificado, request: Request, db=Depends(get_db),
                        usuario: Usuario = Depends(usuario_atual)):
-    return servicos.emitir_certificado(db, usuario, dados.nome, dados.email, dados.cpf)
+    return servicos.emitir_certificado(db, usuario, dados.nome, dados.email, dados.cpf,
+                                       request.app.state.config.instituicao)
 
 
 @router.get("/me/exportar")

@@ -220,7 +220,7 @@ def test_certificado_so_depois_de_tudo_e_cifra_o_cpf(app, app_db):
     assert r.status_code == 200, r.text
     dados = r.json()
     assert dados["cpf"] == "***.982.247-**"
-    assert dados["instituicao"] == "Centro Universitário de Lins – UNILINS"
+    assert dados["instituicao"] == "Instituição de teste"
     with fabrica() as db:
         u = db.query(Usuario).filter_by(email_busca=cifra.codigo_busca("cert@teste.dev")).one()
         assert u.cpf_cifrado and "52998224725" not in u.cpf_cifrado

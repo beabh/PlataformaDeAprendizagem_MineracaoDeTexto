@@ -4,6 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 const { JSDOM, VirtualConsole } = require('jsdom');
+const { execFileSync } = require('child_process');
+const BACKEND = path.join(__dirname, '..', '..');
 
 const BASE = process.env.BASE_URL || 'http://127.0.0.1:8766';
 const GABARITO_PROVA_1 = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'dados', 'provas.json'), 'utf8'))['1']
@@ -189,6 +191,27 @@ async function resolverPendente(dom, ordem, preencher) {
   docCad.getElementById('form-cadastro').dispatchEvent(new d.window.Event('submit', { cancelable: true, bubbles: true }));
   await esperar(d, (doc) => !doc.getElementById('aviso-cadastro').hidden);
   ok(d.window.document.getElementById('aviso-cadastro').textContent.includes('Já existe uma conta'), 'cadastro: e-mail já usado mostra a mensagem do servidor');
+
+  // ---------- Painel da turma e recuperação de senha (telas) ----------
+  d = await abrir('admin.html', ana);
+  await esperar(d, (doc) => !doc.getElementById('sem-acesso').hidden);
+  ok(!d.window.document.getElementById('sem-acesso').hidden, 'painel da turma: estudante vê o aviso de acesso restrito');
+  ok(d.window.document.getElementById('conteudo-admin').hidden, 'painel da turma: dados da turma ficam ocultos para estudante');
+  // Professor: criado pela linha de comando (como no documento), vê a tabela da turma.
+  const EMAIL_PROF = `prof.${Date.now()}@teste.dev`;
+  const cookieProf = await cookieDe(EMAIL_PROF, 'Professora Teste');
+  execFileSync(path.join(BACKEND, '.venv', 'bin', 'python'), ['-m', 'app.admin', 'promover', EMAIL_PROF, 'professor'],
+    { cwd: BACKEND, env: { ...process.env, PLN_DATABASE_URL: 'postgresql+psycopg://pln:pln@localhost:5432/plataforma_pln_e2e' } });
+  d = await abrir('admin.html', cookieProf);
+  await esperar(d, (doc) => doc.querySelectorAll('#corpo-estudantes tr').length > 0 && !doc.getElementById('conteudo-admin').hidden);
+  const linhasAdmin = [...d.window.document.querySelectorAll('#corpo-estudantes tr')].map((tr) => tr.textContent);
+  ok(linhasAdmin.some((t) => t.includes(EMAIL_PROF)), 'painel da turma: professor vê os estudantes da turma');
+  ok(d.window.document.querySelectorAll('#corpo-modulos tr').length > 0, 'painel da turma: desempenho por módulo preenchido');
+
+  d = await abrir('esqueci-senha.html', null);
+  ok(d.window.document.getElementById('form-esqueci'), 'esqueci a senha: formulário presente');
+  d = await abrir('redefinir-senha.html', null);
+  ok(d.window.document.querySelector('#form-redefinir button[type="submit"]').disabled, 'redefinir senha: sem token, o botão fica desabilitado');
 
   // ---------- Sem erros de script ----------
   ok(erros.length === 0, 'nenhum erro de script nas telas' + (erros.length ? ': ' + erros.join(' | ') : ''));

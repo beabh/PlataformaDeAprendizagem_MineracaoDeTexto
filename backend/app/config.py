@@ -15,6 +15,15 @@ class Configuracao:
     ambiente: str                 # "desenvolvimento" libera o login de teste; "producao" não
     chave_cripto: str             # chave Fernet (base64) para cifrar dados pessoais e o CPF
     turma_padrao: str             # turma onde entram os novos estudantes
+    url_publica: str = "http://localhost:8000"
+    smtp_host: str | None = None
+    smtp_porta: int = 587
+    smtp_usuario: str | None = None
+    smtp_senha: str | None = None
+    smtp_remetente: str = "plataforma@localhost"
+    pasta_correio: str | None = None  # None: mensagens só na memória (testes)
+    exigir_verificacao: bool = False  # se True, só entra quem confirmou o e-mail
+    instituicao: str = "Instituição (nome a definir)"  # nome aparece no certificado
 
     @property
     def em_producao(self) -> bool:
@@ -44,4 +53,13 @@ def carregar() -> Configuracao:
         ambiente=ambiente,
         chave_cripto=chave_cripto,
         turma_padrao=os.environ.get("PLN_TURMA_PADRAO", "TURMA-PADRAO"),
+        url_publica=os.environ.get("PLN_URL_PUBLICA", "http://localhost:8000").rstrip("/"),
+        smtp_host=os.environ.get("PLN_SMTP_HOST") or None,
+        smtp_porta=int(os.environ.get("PLN_SMTP_PORTA", "587")),
+        smtp_usuario=os.environ.get("PLN_SMTP_USUARIO") or None,
+        smtp_senha=os.environ.get("PLN_SMTP_SENHA") or None,
+        smtp_remetente=os.environ.get("PLN_SMTP_REMETENTE", "plataforma@localhost"),
+        pasta_correio=os.environ.get("PLN_PASTA_CORREIO", str(Path(__file__).resolve().parents[1] / "caixa_de_saida")),
+        exigir_verificacao=os.environ.get("PLN_EXIGIR_VERIFICACAO", "false").lower() == "true",
+        instituicao=os.environ.get("PLN_INSTITUICAO", "Instituição (nome a definir)"),
     )

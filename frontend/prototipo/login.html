@@ -12,7 +12,7 @@
   <header class="topo">
     <div class="container">
       <a class="logo-area" href="index.html" aria-label="Início">
-        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <span class="logo-chip"><span class="logo-placeholder-marca" role="img" aria-label="Logotipo institucional (aguardando autorização)">LOGO</span></span>
         <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
       </a>
     </div>
@@ -26,6 +26,7 @@
         <p class="subtitulo">Entre com o e-mail e a senha que você cadastrou.</p>
 
         <div class="card" style="display:grid; gap:1rem">
+          <p id="aviso-info" role="status" hidden style="margin:0; color:#1b5e20"></p>
           <form id="form-entrar" style="display:grid; gap:1rem">
             <div class="campo">
               <label for="login-email">E-mail</label>
@@ -38,6 +39,7 @@
             <p id="aviso-entrar" role="alert" hidden style="margin:0; color:#b00020"></p>
             <button class="btn btn-escuro" type="submit">Entrar</button>
           </form>
+          <p style="margin:0; font-size:.9rem"><a href="esqueci-senha.html">Esqueci minha senha</a></p>
           <p style="margin:0; font-size:.9rem">Ainda não tem conta? <a href="cadastro.html">Criar conta</a></p>
         </div>
       </div>

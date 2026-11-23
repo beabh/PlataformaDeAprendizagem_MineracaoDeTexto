@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova senha · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <a class="logo-area" href="index.html" aria-label="Início">
+        <span class="logo-chip"><span class="logo-placeholder-marca" role="img" aria-label="Logotipo institucional (aguardando autorização)">LOGO</span></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="bloco">
+      <div class="container" style="max-width:520px">
+        <p class="migalhas"><a href="index.html">Início</a> / Nova senha</p>
+        <h1 class="titulo-pagina">Criar nova senha</h1>
+        <p class="subtitulo">Escolha uma senha com pelo menos 8 caracteres. O link vale uma vez.</p>
+
+        <div class="card" style="display:grid; gap:1rem">
+          <form id="form-redefinir" style="display:grid; gap:1rem">
+            <div class="campo">
+              <label for="redef-senha">Nova senha</label>
+              <input id="redef-senha" name="senha" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+            </div>
+            <div class="campo">
+              <label for="redef-confirmar">Confirmar nova senha</label>
+              <input id="redef-confirmar" name="confirmar" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+            </div>
+            <p id="aviso-redefinir" role="alert" hidden style="margin:0; color:#b00020"></p>
+            <button class="btn btn-escuro" type="submit">Salvar nova senha</button>
+          </form>
+          <p style="margin:0; font-size:.9rem"><a href="login.html">Voltar para entrar</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="rodape-base">Protótipo de interface · Política de privacidade a elaborar conforme a LGPD.</p>
+    </div>
+  </footer>
+
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -78,16 +78,4 @@
   document.addEventListener('DOMContentLoaded', preencherConta);
   window.PLNConta = { atualizar: preencherConta };
 
-  // ---------- Logo da instituição: se não carregar, mostra o nome no lugar ----------
-  function trocarPorTexto(img) {
-    var span = document.createElement('span');
-    span.className = 'logo-chip-texto';
-    span.textContent = 'UNILINS';
-    img.replaceWith(span);
-  }
-  document.querySelectorAll('img.logo-unilins').forEach(function (img) {
-    img.addEventListener('error', function () { trocarPorTexto(img); });
-    if (img.complete && img.naturalWidth === 0) trocarPorTexto(img);
-  });
-
 })();

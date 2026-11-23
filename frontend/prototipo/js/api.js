@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  var PAGINAS_PUBLICAS = ['login.html', 'cadastro.html', 'index.html', 'sobre.html'];
+  var PAGINAS_PUBLICAS = ['login.html', 'cadastro.html', 'esqueci-senha.html', 'redefinir-senha.html', 'index.html', 'sobre.html'];
 
   function pedir(metodo, url, corpo) {
     var cabecalhos = { 'X-Requested-With': 'fetch', 'Accept': 'application/json' };

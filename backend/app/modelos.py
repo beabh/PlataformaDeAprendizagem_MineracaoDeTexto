@@ -31,6 +31,8 @@ class Usuario(Base):
     cpf_cifrado: Mapped[str | None] = mapped_column(Text)
     turma_id: Mapped[int | None] = mapped_column(ForeignKey("turma.id"))
     anonimizado: Mapped[bool] = mapped_column(Boolean, default=False)
+    perfil: Mapped[str] = mapped_column(String(20), default="estudante")  # estudante, professor ou administrador
+    email_verificado: Mapped[bool] = mapped_column(Boolean, default=False)
     criado_em: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
@@ -130,3 +132,14 @@ class ProvaTentativa(Base):
     total: Mapped[int] = mapped_column(Integer)
     aprovado: Mapped[bool] = mapped_column(Boolean)
     criado_em: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class TokenAcao(Base):
+    """Link de uso único (verificar e-mail ou redefinir senha). Guarda só o hash do token."""
+    __tablename__ = "token_acao"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    usuario_id: Mapped[int] = mapped_column(ForeignKey("usuario.id"), index=True)
+    tipo: Mapped[str] = mapped_column(String(30))
+    hash_token: Mapped[str] = mapped_column(String(64), unique=True)
+    expira_em: Mapped[datetime] = mapped_column(DateTime)
+    usado_em: Mapped[datetime | None] = mapped_column(DateTime)

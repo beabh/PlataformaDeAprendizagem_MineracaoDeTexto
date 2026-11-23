@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel da turma · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <a class="logo-area" href="index.html" aria-label="Início">
+        <span class="logo-chip"><span class="logo-placeholder-marca" role="img" aria-label="Logotipo institucional (aguardando autorização)">LOGO</span></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="bloco">
+      <div class="container" style="max-width:980px">
+        <p class="migalhas"><a href="index.html">Início</a> / Painel da turma</p>
+        <h1 class="titulo-pagina">Painel da turma</h1>
+        <p class="subtitulo">Acompanhe os estudantes e o desempenho nas provas. Disponível para professores e administradores.</p>
+
+        <div class="card" style="display:grid; gap:1rem">
+          <div id="sem-acesso" hidden>
+            <p style="margin:0">Esta área é restrita a professores e administradores.</p>
+          </div>
+          <div id="conteudo-admin" hidden style="display:grid; gap:1.5rem">
+            <p id="aviso-admin" role="alert" hidden style="margin:0; color:#b00020"></p>
+            <section aria-labelledby="titulo-estudantes">
+              <h2 id="titulo-estudantes" style="font-size:1.2rem">Estudantes</h2>
+              <div style="overflow-x:auto">
+                <table class="tabela">
+                  <caption class="sr-only">Estudantes, pontos e progresso</caption>
+                  <thead><tr><th scope="col">Nº</th><th scope="col">Nome</th><th scope="col">E-mail</th><th scope="col">E-mail confirmado</th><th scope="col">Pontos</th><th scope="col">Aulas</th><th scope="col">Provas aprovadas</th><th scope="col">Perfil</th></tr></thead>
+                  <tbody id="corpo-estudantes"></tbody>
+                </table>
+              </div>
+            </section>
+            <section aria-labelledby="titulo-modulos">
+              <h2 id="titulo-modulos" style="font-size:1.2rem">Desempenho por módulo</h2>
+              <div style="overflow-x:auto">
+                <table class="tabela">
+                  <caption class="sr-only">Provas por módulo</caption>
+                  <thead><tr><th scope="col">Módulo</th><th scope="col">Título</th><th scope="col">Alunos que passaram</th><th scope="col">Média de acertos</th></tr></thead>
+                  <tbody id="corpo-modulos"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <p style="margin:0; font-size:.9rem"><a href="painel.html">Voltar ao painel do estudante</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="rodape-base">Protótipo de interface · Política de privacidade a elaborar conforme a LGPD.</p>
+    </div>
+  </footer>
+
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

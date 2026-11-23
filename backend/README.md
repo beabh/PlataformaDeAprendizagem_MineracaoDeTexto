@@ -118,3 +118,22 @@ Nesta versão não há login de produção: a entrada de teste só existe com `P
 docker build -t plataforma-pln .
 docker run -p 8000:8000 --env-file backend/.env plataforma-pln
 ```
+
+## Perfis, painel da turma e e-mails
+
+- **Perfis:** `estudante` (padrão), `professor` e `administrador`. O cadastro público sempre cria estudante. Perfis são trocados só por linha de comando, no servidor:
+  ```
+  ./.venv/bin/python -m app.admin promover voce@instituicao.edu.br professor
+  ```
+  Um administrador também pode mudar perfis pelo painel (`PUT /api/admin/usuarios/{id}/perfil`), mas não o próprio.
+- **Painel da turma:** `admin.html` (professor e administrador). Mostra estudantes, pontos, aulas e provas aprovadas, e o desempenho por módulo.
+- **E-mails:** confirmação de cadastro e redefinição de senha. Sem `PLN_SMTP_HOST`, em desenvolvimento, as mensagens vão para a pasta `backend/caixa_de_saida`: abra o arquivo `.eml` e clique no link. Com SMTP, o envio é real (`PLN_SMTP_HOST`, `PLN_SMTP_PORTA`, `PLN_SMTP_USUARIO`, `PLN_SMTP_SENHA`, `PLN_SMTP_REMETENTE`).
+- **Exigir confirmação:** `PLN_EXIGIR_VERIFICACAO=true` impede entrar antes de confirmar o e-mail. O padrão é `false`, porque sem SMTP o link fica na pasta.
+- **Limite de tentativas:** 10 entradas a cada 15 minutos por conta e IP, e 5 pedidos de redefinição por hora por IP. Fica na memória do processo, então vale para um servidor só.
+- **Instituição:** `PLN_INSTITUICAO` define o nome que aparece no certificado. O padrão é um espaço reservado, até a autorização.
+
+## Docker Compose
+
+`docker compose up --build` sobe o servidor e um PostgreSQL. Ainda não foi testado neste ambiente, porque o daemon do Docker não estava disponível.
+
+> **Atenção:** as tabelas mudaram de novo. Recrie o banco (apague o `plataforma.db` ou recrie o PostgreSQL) antes de rodar.

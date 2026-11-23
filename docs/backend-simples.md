@@ -8,7 +8,7 @@ Stack prevista na especificação: Spring Boot + Spring Security + JPA + Flyway 
 
 | Tabela | Campos principais | Observação |
 |---|---|---|
-| `usuario` | id, nome, email, senha (hash), cpf, turma_id, criado_em | Nome, e-mail e CPF cifrados; senha só como hash scrypt. O CPF só existe para o certificado. |
+| `usuario` | id, nome, email, senha (hash), perfil, email_verificado, cpf, turma_id, criado_em | Nome, e-mail e CPF cifrados; senha só como hash scrypt. O CPF só existe para o certificado. |
 | `turma` | id, nome, docente_id | Define quem aparece na mesma classificação. |
 | `aula` | cod (ex.: `1.1`), modulo_id, ordem | Catálogo do programa. |
 | `exercicio` | id, aula_cod, ordem, tipo (`escolha` ou `digitar`), enunciado, explicacao | Não guarda a resposta certa. |
@@ -76,6 +76,13 @@ ORDER BY total DESC, :desempate;
 |---|---|
 | `POST /auth/cadastro` | Cria a conta com nome, e-mail e senha, e abre a sessão. |
 | `POST /auth/entrar` | Entra com e-mail e senha. |
+| `GET /auth/verificar?token=` | Confirma o e-mail pelo link enviado; uso único. |
+| `POST /auth/reenviar-verificacao` | Envia de novo o link de confirmação (conta logada, não confirmada). |
+| `POST /auth/esqueci-senha` | Envia o link de redefinição; a resposta é a mesma para qualquer e-mail. |
+| `POST /auth/redefinir-senha` | Troca a senha com o token do link (uso único, vale 1 hora). |
+| `GET /api/admin/estudantes` | Estudantes da turma com pontos e progresso (professor e administrador). |
+| `GET /api/admin/modulos` | Desempenho por módulo (professor e administrador). |
+| `PUT /api/admin/usuarios/{id}/perfil` | Altera o perfil de outra conta (só administrador). |
 | `GET /auth/desenvolvimento` | Entrada de teste, sem senha. Só em desenvolvimento; usada pelos testes. |
 | `POST /auth/sair` | Encerra a sessão. |
 | `GET /api/me` | Dados do estudante da sessão atual. |

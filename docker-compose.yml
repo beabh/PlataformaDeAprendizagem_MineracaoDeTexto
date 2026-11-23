@@ -1,0 +1,29 @@
+# Sobe o servidor e o PostgreSQL juntos (use: docker compose up --build).
+# Sem Docker, basta o SQLite do backend/.env.example.
+services:
+  banco:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: pln
+      POSTGRES_PASSWORD: pln
+      POSTGRES_DB: plataforma_pln
+    volumes:
+      - dados_banco:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pln -d plataforma_pln"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    env_file: backend/.env
+    environment:
+      PLN_DATABASE_URL: postgresql+psycopg://pln:pln@banco:5432/plataforma_pln
+    ports:
+      - "8000:8000"
+    depends_on:
+      banco:
+        condition: service_healthy
+
+volumes:
+  dados_banco:

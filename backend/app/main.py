@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
-from . import cifra
+from . import cifra, rotas_admin
 from . import catalogo, rotas, rotas_auth
 from .banco import Base, criar_fabrica
 from .config import Configuracao
@@ -58,6 +58,7 @@ def criar_app(cfg: Configuracao | None = None, fabrica=None, criar_tabelas: bool
 
     app.include_router(rotas_auth.router, prefix="/auth")
     app.include_router(rotas.router, prefix="/api")
+    app.include_router(rotas_admin.router, prefix="/api/admin")
 
     if criar_tabelas and engine is not None:
         Base.metadata.create_all(engine)
