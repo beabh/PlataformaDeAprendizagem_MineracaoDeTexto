@@ -18,7 +18,7 @@ cp .env.example .env                          # ajuste PLN_DATABASE_URL se preci
 
 No Windows (Git Bash), troque `./.venv/bin/` por `./.venv/Scripts/`. O servidor lê `backend/.env` sozinho; variáveis já definidas no sistema têm prioridade.
 
-Abra http://localhost:8000/ e use **Entrar como teste** (só existe em `PLN_AMBIENTE=desenvolvimento`):
+Abra http://localhost:8000/ e use a tela **Entrar (simulação)** (só existe em `PLN_AMBIENTE=desenvolvimento`):
 `/auth/desenvolvimento?email=seu@email.dev&nome=Seu%20Nome`.
 
 Na primeira execução, as tabelas são criadas e o catálogo (módulos, aulas, exercícios e provas)
@@ -33,16 +33,6 @@ PLN_DATABASE_URL_TESTE=postgresql+psycopg://pln:pln@localhost:5432/plataforma_pl
 
 Os testes apagam e recriam o banco de testes a cada caso. Não use o banco de desenvolvimento.
 
-## Login com Google
-
-1. No Google Cloud Console, crie um **ID do cliente OAuth** do tipo "Aplicativo da Web".
-2. Em **URIs de redirecionamento autorizados**, adicione `PLN_URL_PUBLICA/auth/google/retorno`
-   (por exemplo `http://localhost:8000/auth/google/retorno`).
-3. Coloque `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET` no `.env`.
-
-Sem essas duas variáveis, `/auth/google` responde 503 com a mensagem de configuração.
-Só são aceitas contas com e-mail verificado. Não há restrição de domínio nesta versão
-(a decidir com a instituição: por exemplo, aceitar só e-mails institucionais).
 
 ## Regras que o servidor aplica
 
@@ -60,7 +50,6 @@ Só são aceitas contas com e-mail verificado. Não há restrição de domínio 
 
 | Método e caminho | O que faz | Função da interface |
 |---|---|---|
-| `GET /auth/google` · `GET /auth/google/retorno` | Login com Google | Botão "Continuar com o Google" |
 | `GET /auth/desenvolvimento` | Login de teste (só em desenvolvimento) | Atalho local |
 | `POST /auth/sair` | Encerra a sessão | Botão "Sair" |
 | `GET /api/me` | Nome e e-mail do usuário logado | Cabeçalho |
@@ -93,7 +82,7 @@ app/
   regras.py        pontos, aprovação, normalização e CPF (funções puras)
   servicos.py      operações do estudante (transações e travamento)
   rotas.py         endpoints /api
-  rotas_auth.py    login com Google e login de teste
+  rotas_auth.py    login de teste (simulação) e saída
   catalogo.py      carga de módulos, aulas, exercícios e provas
   dependencias.py  sessão do banco e usuário logado
 dados/             catálogo, exercícios e provas exportados do protótipo (tools/exportar_dados.js)
@@ -120,11 +109,9 @@ node tools/exportar_dados.js
 
 ## Publicar na internet
 
-O servidor precisa de HTTPS público para o login com o Google funcionar. A imagem é construída a partir da raiz do repositório:
+Nesta versão não há login de produção: a entrada de teste só existe com `PLN_AMBIENTE=desenvolvimento`. Antes de abrir o site para estudantes, é preciso escolher um método de login. A imagem é construída a partir da raiz do repositório:
 
 ```
 docker build -t plataforma-pln .
 docker run -p 8000:8000 --env-file backend/.env plataforma-pln
 ```
-
-Em produção, defina `PLN_AMBIENTE=producao`, `PLN_URL_PUBLICA` com o endereço HTTPS final, `PLN_SEGREDO_SESSAO`, `PLN_CHAVE_CPF`, `PLN_DATABASE_URL` (PostgreSQL), `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`. Sem as duas últimas o login com o Google responde 503. Se o Google não puder ser alcançado, a página mostra "Não foi possível conectar ao Google agora".

@@ -13,9 +13,6 @@ class Configuracao:
     database_url: str
     segredo_sessao: str
     ambiente: str                 # "desenvolvimento" libera o login de teste; "producao" não
-    google_client_id: str | None
-    google_client_secret: str | None
-    url_publica: str              # endereço onde o site é servido (usado no retorno do Google)
     chave_cpf: str                # chave Fernet (base64) para cifrar o CPF
     turma_padrao: str             # turma onde entram os novos estudantes
 
@@ -43,9 +40,6 @@ def carregar() -> Configuracao:
         ),
         segredo_sessao=segredo,
         ambiente=ambiente,
-        google_client_id=os.environ.get("GOOGLE_CLIENT_ID") or None,
-        google_client_secret=os.environ.get("GOOGLE_CLIENT_SECRET") or None,
-        url_publica=os.environ.get("PLN_URL_PUBLICA", "http://localhost:8000"),
         chave_cpf=chave_cpf,
         turma_padrao=os.environ.get("PLN_TURMA_PADRAO", "TURMA-PADRAO"),
     )

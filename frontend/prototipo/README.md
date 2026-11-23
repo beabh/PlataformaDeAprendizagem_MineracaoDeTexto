@@ -13,7 +13,7 @@ Abra `index.html` no navegador. Não é preciso instalar nada.
 | `index.html` | Página inicial | Pública |
 | `programa.html` | Programa da disciplina | Pública |
 | `sobre.html` | Sobre o projeto, equipe e instituição | Pública |
-| `login.html` | Entrar (somente Google) | Pública |
+| `login.html` | Entrar (simulação com e-mail e nome) | Pública |
 | `onboarding.html` | Primeiros passos: nome e meta diária | Estudante |
 | `painel.html` | Painel com progresso, próxima aula e atalhos | Estudante |
 | `trilha.html` | Trilha de módulos com bloqueios | Estudante |

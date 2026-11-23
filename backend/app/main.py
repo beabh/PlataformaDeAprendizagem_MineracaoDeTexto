@@ -54,7 +54,6 @@ def criar_app(cfg: Configuracao | None = None, fabrica=None, criar_tabelas: bool
     async def dados_invalidos(_: Request, exc: RequestValidationError):
         return JSONResponse({"codigo": "dados_invalidos", "mensagem": "Confira os dados enviados."}, status_code=422)
 
-    rotas_auth.registrar_google(cfg)
     app.include_router(rotas_auth.router, prefix="/auth")
     app.include_router(rotas.router, prefix="/api")
 

@@ -15,7 +15,6 @@ CHAVE = Fernet.generate_key().decode()
 
 def configuracao() -> Configuracao:
     return Configuracao(database_url=URL_TESTE, segredo_sessao="teste-segredo", ambiente="desenvolvimento",
-                        google_client_id=None, google_client_secret=None, url_publica="http://testserver",
                         chave_cpf=CHAVE, turma_padrao="TURMA-TESTE")
 
 

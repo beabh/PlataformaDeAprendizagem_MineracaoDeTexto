@@ -69,7 +69,7 @@ async function resolverPendente(dom, ordem, preencher) {
 
   // ---------- Login e menu ----------
   const dl = await abrir('login.html', null);
-  ok(dl.window.document.querySelector('a[href="/auth/google"]'), 'login: botão "Continuar com o Google" aponta para o login real');
+  ok(dl.window.document.querySelector('form[action="/auth/desenvolvimento"]'), 'login: formulário de simulação aponta para a entrada de teste');
 
   const ana = await cookieDe(EMAIL, 'Ana Paula Souza');
   let d = await abrir('trilha.html', ana);

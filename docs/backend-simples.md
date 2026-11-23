@@ -2,13 +2,13 @@
 
 Objetivo: o servidor faz só o que o navegador não pode fazer com segurança (guardar dados, corrigir respostas, somar pontos e montar a classificação). Todo o resto é tela.
 
-Stack prevista na especificação: Spring Boot + Spring Security + JPA + Flyway + PostgreSQL, com login pelo Google (OAuth/OIDC). Este documento descreve o comportamento; a implementação ainda não existe.
+Stack prevista na especificação: Spring Boot + Spring Security + JPA + Flyway + PostgreSQL, com login a definir (o protótipo usa uma simulação por e-mail). Este documento descreve o comportamento; a implementação ainda não existe.
 
 ## 1. Tabelas
 
 | Tabela | Campos principais | Observação |
 |---|---|---|
-| `usuario` | id, nome, email (do Google), cpf (criptografado, opcional), turma_id, criado_em | Sem senha. O CPF só existe para o certificado. |
+| `usuario` | id, nome, email, cpf (criptografado, opcional), turma_id, criado_em | Sem senha. O CPF só existe para o certificado. |
 | `turma` | id, nome, docente_id | Define quem aparece na mesma classificação. |
 | `aula` | cod (ex.: `1.1`), modulo_id, ordem | Catálogo do programa. |
 | `exercicio` | id, aula_cod, ordem, tipo (`escolha` ou `digitar`), enunciado, explicacao | Não guarda a resposta certa. |
@@ -21,7 +21,7 @@ Stack prevista na especificação: Spring Boot + Spring Security + JPA + Flyway 
 
 ## 2. O que acontece em cada ação
 
-**Entrar.** A pessoa clica em "Continuar com o Google". O Google devolve a identidade (e-mail e nome). O servidor cria o `usuario` na primeira vez e abre uma sessão com um cookie `HttpOnly`. O navegador nunca guarda senha nem token de acesso do Google.
+**Entrar.** Nesta versão, a pessoa informa e-mail e nome na tela de entrada. Isso é uma simulação, disponível só em desenvolvimento. O servidor cria o `usuario` na primeira vez e abre uma sessão com um cookie `HttpOnly`. O navegador nunca guarda senha.
 
 **Abrir uma aula.** O navegador pede `GET /api/aulas/{cod}`. O servidor confere se a aula está liberada para aquele usuário (regra de sequência e de prova) e devolve o enunciado dos exercícios, sem o gabarito, e o que o usuário já resolveu.
 
@@ -74,9 +74,7 @@ ORDER BY total DESC, :desempate;
 
 | Método e caminho | Faz |
 |---|---|
-| `GET /auth/google` | Inicia o login com o Google. |
-| `GET /auth/google/retorno` | Recebe o retorno do Google, confere o e-mail verificado e abre a sessão. |
-| `GET /auth/desenvolvimento` | Login de teste sem Google. Responde 404 em produção. |
+| `GET /auth/desenvolvimento` | Entrada de teste (simulação). Responde 404 em produção. |
 | `POST /auth/sair` | Encerra a sessão. |
 | `GET /api/me` | Dados do estudante da sessão atual. |
 | `GET /api/trilha` | Módulos, aulas, estados, pontos e próxima aula. |
@@ -107,7 +105,7 @@ Erros seguem um formato único: `{ "codigo": "...", "mensagem": "..." }`. O nave
 
 | Assunto | Protótipo | Versão final |
 |---|---|---|
-| Onde fica o progresso | localStorage do navegador | Banco de dados, vinculado à conta do Google |
+| Onde fica o progresso | localStorage do navegador | Banco de dados, vinculado ao usuário |
 | Gabarito | No código do navegador | Só no servidor |
 | Classificação | Só a linha do próprio estudante | Consulta real sobre a turma |
 | Pontos | Mesma tabela (`PLN.PONTOS`) e mesma regra de perda | Mesma regra, no servidor |

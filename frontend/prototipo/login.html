@@ -23,10 +23,20 @@
       <div class="container" style="max-width:520px">
         <p class="migalhas"><a href="index.html">Início</a> / Entrar</p>
         <h1 class="titulo-pagina">Entrar na plataforma</h1>
-        <p class="subtitulo">O acesso é feito somente com sua conta Google. Não há cadastro com senha.</p>
+        <p class="subtitulo">Simulação de acesso: informe um e-mail e um nome. Não há login com Google nem cadastro com senha.</p>
 
         <div class="card" style="display:grid; gap:1rem">
-          <a class="btn btn-escuro" href="/auth/google" style="text-align:center">Continuar com o Google</a>
+          <form action="/auth/desenvolvimento" method="get" style="display:grid; gap:1rem">
+            <div class="campo">
+              <label for="login-email">E-mail</label>
+              <input id="login-email" name="email" type="email" required maxlength="255" autocomplete="email" />
+            </div>
+            <div class="campo">
+              <label for="login-nome">Nome</label>
+              <input id="login-nome" name="nome" type="text" maxlength="120" autocomplete="name" />
+            </div>
+            <button class="btn btn-escuro" type="submit">Entrar (simulação)</button>
+          </form>
           <p style="margin:0; font-size:.9rem">
             Ao entrar, usamos apenas seu nome e e-mail para identificar seu progresso. O CPF só será solicitado
             se você pedir o certificado, e apenas para a emissão.

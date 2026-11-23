@@ -34,7 +34,7 @@
       curso: curso.value.trim()
     }).then(function (p) {
       nome.value = p.nome_exibicao;
-      avisoTexto('Perfil salvo. ' + (p.nome_exibicao ? 'O menu agora mostra "' + p.nome_exibicao + '".' : 'Sem nome, o menu mostra o nome da sua conta Google.'));
+      avisoTexto('Perfil salvo. ' + (p.nome_exibicao ? 'O menu agora mostra "' + p.nome_exibicao + '".' : 'Sem nome, o menu mostra o nome do seu cadastro.'));
       if (window.PLNConta) window.PLNConta.atualizar();
     }).catch(function (err) {
       avisoTexto(err.message, 'erro');
