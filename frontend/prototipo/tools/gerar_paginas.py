@@ -67,11 +67,18 @@ ICONES = {
 GRUPOS = [
     ('Estudo', [('painel.html', 'painel', 'Painel'), ('trilha.html', 'trilha', 'Trilha de aprendizagem'), ('programa.html', 'programa', 'Programa'), ('classificacao.html', 'classificacao', 'Classificação')]),
     ('Ferramentas', [('laboratorio.html', 'laboratorio', 'Laboratório de texto'), ('glossario.html', 'glossario', 'Glossário')]),
-    ('Conta', [('certificado.html', 'certificado', 'Certificado'), ('perfil.html', 'perfil', 'Meu perfil')]),
+    ('Conta', [('certificado.html', 'certificado', 'Certificado')]),
 ]
 
 def sidebar(pagina, grupos, rotulo):
-    partes = [f'<aside class="sidebar" id="menu-lateral" aria-label="{rotulo}">', f'<nav aria-label="{rotulo}">']
+    # Bloco da conta no topo da gaveta: nome salvo no perfil e link para a página de perfil.
+    conta = ('<div class="conta-bloco">'
+             '<a class="conta-link" href="perfil.html" data-manter-sessao>'
+             '<span class="avatar" data-iniciais-conta aria-hidden="true">E</span>'
+             '<span class="conta-texto"><strong data-nome-conta>Estudante</strong>'
+             '<small>Clique aqui para acessar o seu perfil</small></span>'
+             '</a></div>')
+    partes = [f'<aside class="sidebar" id="menu-lateral" aria-label="{rotulo}">', conta, f'<nav aria-label="{rotulo}">']
     for nome, itens in grupos:
         partes.append(f'<p class="grupo">{E(nome)}</p>')
         partes.append('<ul>')
@@ -81,15 +88,7 @@ def sidebar(pagina, grupos, rotulo):
             dados = '' if alvo.startswith('programa.html') else ' data-manter-sessao'
             partes.append(f'<li><a href="{alvo}"{dados}{atual}><span class="ico">{ICONES[icone]}</span><span>{E(texto)}</span></a></li>')
         partes.append('</ul>')
-    partes.append('</nav>')
-    # Bloco da conta no rodapé da gaveta: nome salvo no perfil e link discreto para a página de perfil.
-    partes.append('<div class="conta-bloco">'
-                  '<a class="conta-link" href="perfil.html" data-manter-sessao>'
-                  '<span class="avatar" data-iniciais-conta aria-hidden="true">E</span>'
-                  '<span class="conta-texto"><strong data-nome-conta>Estudante</strong>'
-                  '<small>Clique aqui para acessar o seu perfil</small></span>'
-                  '</a></div>')
-    partes.append('</aside>')
+    partes.append('</nav></aside>')
     return '\n    '.join(partes)
 
 PAGINAS_ESTUDANTE = ['painel.html', 'trilha.html', 'programa.html', 'classificacao.html', 'aula.html', 'laboratorio.html',
