@@ -1,4 +1,6 @@
 """Login com Google (OpenID Connect) e login de teste para desenvolvimento."""
+import httpx
+from authlib.integrations.base_client.errors import OAuthError
 from authlib.integrations.starlette_client import OAuth
 from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import RedirectResponse
@@ -58,14 +60,26 @@ async def google_entrar(request: Request):
         raise ErroNegocio("google_nao_configurado",
                           "O login com Google não está configurado neste servidor.", 503)
     destino = cfg.url_publica.rstrip("/") + "/auth/google/retorno"
-    return await oauth.google.authorize_redirect(request, destino)
+    try:
+        return await oauth.google.authorize_redirect(request, destino)
+    except (httpx.HTTPError, OSError) as exc:
+        # Sem conexão com o Google (rede, proxy ou DNS): avisa em vez de responder 500.
+        raise ErroNegocio("google_indisponivel",
+                          "Não foi possível conectar ao Google agora. Tente de novo em instantes.", 503) from exc
 
 
 @router.get("/google/retorno")
 async def google_retorno(request: Request, db=Depends(get_db)):
     if "google" not in oauth._registry:
         raise ErroNegocio("google_nao_configurado", "O login com Google não está configurado.", 503)
-    token = await oauth.google.authorize_access_token(request)
+    try:
+        token = await oauth.google.authorize_access_token(request)
+    except OAuthError as exc:
+        # Estado expirado ou login recusado: o estudante tenta de novo a partir do início.
+        raise ErroNegocio("login_invalido", "O login não pôde ser concluído. Tente entrar de novo.", 400) from exc
+    except (httpx.HTTPError, OSError) as exc:
+        raise ErroNegocio("google_indisponivel",
+                          "Não foi possível conectar ao Google agora. Tente de novo em instantes.", 503) from exc
     info = token.get("userinfo") or {}
     if not info.get("email_verified"):
         raise ErroNegocio("email_nao_verificado", "Use uma conta Google com e-mail verificado.", 403)

@@ -115,3 +115,14 @@ node tools/exportar_dados.js
 - **Certificado em PDF:** a API devolve os dados; o documento final ainda não é gerado.
 - **Laboratório de texto:** continua rodando no navegador (sem envio ao servidor).
 - **Migrações de banco:** as tabelas são criadas automaticamente. Para mudanças futuras, use Alembic.
+
+## Publicar na internet
+
+O servidor precisa de HTTPS público para o login com o Google funcionar. A imagem é construída a partir da raiz do repositório:
+
+```
+docker build -t plataforma-pln .
+docker run -p 8000:8000 --env-file backend/.env plataforma-pln
+```
+
+Em produção, defina `PLN_AMBIENTE=producao`, `PLN_URL_PUBLICA` com o endereço HTTPS final, `PLN_SEGREDO_SESSAO`, `PLN_CHAVE_CPF`, `PLN_DATABASE_URL` (PostgreSQL), `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`. Sem as duas últimas o login com o Google responde 503. Se o Google não puder ser alcançado, a página mostra "Não foi possível conectar ao Google agora".
