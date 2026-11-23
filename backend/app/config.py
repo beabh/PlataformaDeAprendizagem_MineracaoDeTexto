@@ -3,6 +3,9 @@ import base64
 import hashlib
 import os
 from dataclasses import dataclass
+from pathlib import Path
+
+from dotenv import load_dotenv
 
 
 @dataclass(frozen=True)
@@ -22,6 +25,8 @@ class Configuracao:
 
 
 def carregar() -> Configuracao:
+    # Lê backend/.env se existir. Variáveis já definidas no sistema têm prioridade.
+    load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
     ambiente = os.environ.get("PLN_AMBIENTE", "desenvolvimento")
     segredo = os.environ.get("PLN_SEGREDO_SESSAO", "troque-este-segredo-em-producao")
     chave_cpf = os.environ.get("PLN_CHAVE_CPF")

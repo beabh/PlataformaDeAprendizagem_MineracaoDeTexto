@@ -16,6 +16,8 @@ cp .env.example .env                          # ajuste PLN_DATABASE_URL se preci
 ./.venv/bin/uvicorn app.main:criar_app --factory --reload --port 8000
 ```
 
+No Windows (Git Bash), troque `./.venv/bin/` por `./.venv/Scripts/`. O servidor lê `backend/.env` sozinho; variáveis já definidas no sistema têm prioridade.
+
 Abra http://localhost:8000/ e use **Entrar como teste** (só existe em `PLN_AMBIENTE=desenvolvimento`):
 `/auth/desenvolvimento?email=seu@email.dev&nome=Seu%20Nome`.
 
