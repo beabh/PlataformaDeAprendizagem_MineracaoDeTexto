@@ -81,7 +81,15 @@ def sidebar(pagina, grupos, rotulo):
             dados = '' if alvo.startswith('programa.html') else ' data-manter-sessao'
             partes.append(f'<li><a href="{alvo}"{dados}{atual}><span class="ico">{ICONES[icone]}</span><span>{E(texto)}</span></a></li>')
         partes.append('</ul>')
-    partes.append('</nav></aside>')
+    partes.append('</nav>')
+    # Bloco da conta no rodapé da gaveta: nome salvo no perfil e link discreto para a página de perfil.
+    partes.append('<div class="conta-bloco">'
+                  '<a class="conta-link" href="perfil.html" data-manter-sessao>'
+                  '<span class="avatar" data-iniciais-conta aria-hidden="true">E</span>'
+                  '<span class="conta-texto"><strong data-nome-conta>Estudante</strong>'
+                  '<small>Clique aqui para acessar o seu perfil</small></span>'
+                  '</a></div>')
+    partes.append('</aside>')
     return '\n    '.join(partes)
 
 PAGINAS_ESTUDANTE = ['painel.html', 'trilha.html', 'programa.html', 'classificacao.html', 'aula.html', 'laboratorio.html',

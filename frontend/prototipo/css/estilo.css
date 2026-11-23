@@ -583,3 +583,20 @@ table.tabela td span:first-child { font-variant-numeric: tabular-nums; font-weig
 .topo .container { display: flex; align-items: center; }
 .topo .logo-area { flex: 1; }
 .menu-toggle { display: none; }
+
+/* ---------- Bloco da conta no rodapé da gaveta (nome salvo e link para o perfil) ---------- */
+.conta-bloco { margin-top: 1.25rem; padding: .9rem .6rem 0; border-top: 1px solid var(--borda); }
+.conta-link {
+  display: flex; align-items: center; gap: .65rem; padding: .5rem .6rem;
+  border-radius: 10px; color: var(--texto); text-decoration: none; min-width: 0;
+}
+.conta-link:hover { background: var(--cinza-claro); }
+.conta-link:focus-visible { outline: 3px solid var(--laranja); outline-offset: 2px; }
+.avatar {
+  flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--azul-escuro); color: var(--branco); font-weight: 700; font-size: .85rem;
+}
+.conta-texto { display: flex; flex-direction: column; min-width: 0; }
+.conta-texto strong { font-size: .95rem; color: var(--texto); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.conta-texto small { font-size: .78rem; color: var(--cinza-medio); line-height: 1.3; }
