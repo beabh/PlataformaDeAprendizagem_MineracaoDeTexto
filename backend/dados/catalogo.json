@@ -1,0 +1,287 @@
+[
+  {
+    "id": "P",
+    "titulo": "Python aplicado a texto",
+    "tipo": "preparacao",
+    "prova": false,
+    "aulas": [
+      {
+        "cod": "P.1",
+        "titulo": "Strings e textos da pandemia"
+      },
+      {
+        "cod": "P.2",
+        "titulo": "Listas e dicionários para tokens"
+      },
+      {
+        "cod": "P.3",
+        "titulo": "Contando palavras com Counter"
+      },
+      {
+        "cod": "P.4",
+        "titulo": "Lendo TXT e CSV do corpus, com validação"
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "titulo": "Introdução à mineração de texto",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "1.1",
+        "titulo": "Dados estruturados, não estruturados e mineração de texto",
+        "conteudo": true
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "titulo": "Fundamentos de linguagem natural",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "2.1",
+        "titulo": "O que é PLN e por que a linguagem é ambígua"
+      },
+      {
+        "cod": "2.2",
+        "titulo": "Corpus e tokens: a unidade básica da análise"
+      },
+      {
+        "cod": "2.3",
+        "titulo": "Normalização do texto"
+      },
+      {
+        "cod": "2.4",
+        "titulo": "Stopwords: o que remover e o que manter"
+      },
+      {
+        "cod": "2.5",
+        "titulo": "Stemming e lematização"
+      },
+      {
+        "cod": "2.6",
+        "titulo": "Desafios do português brasileiro"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "titulo": "Preparação e limpeza de dados textuais",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "3.1",
+        "titulo": "Coleta e preparação do corpus"
+      },
+      {
+        "cod": "3.2",
+        "titulo": "Remoção de ruídos, pontuação e caracteres"
+      },
+      {
+        "cod": "3.3",
+        "titulo": "Duplicatas e dados ausentes"
+      },
+      {
+        "cod": "3.4",
+        "titulo": "Padronização e metadados: fonte, período e licença"
+      },
+      {
+        "cod": "3.5",
+        "titulo": "Considerações éticas e de privacidade"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "titulo": "Frequência e representação textual",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "4.1",
+        "titulo": "Frequência absoluta e relativa"
+      },
+      {
+        "cod": "4.2",
+        "titulo": "N-gramas"
+      },
+      {
+        "cod": "4.3",
+        "titulo": "Bag of Words e vetorização"
+      },
+      {
+        "cod": "4.4",
+        "titulo": "TF-IDF"
+      },
+      {
+        "cod": "4.5",
+        "titulo": "Similaridade do cosseno"
+      },
+      {
+        "cod": "4.6",
+        "titulo": "Introdução a embeddings"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "titulo": "Análise de sentimentos",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "5.1",
+        "titulo": "Conceito e classes: positiva, negativa e neutra"
+      },
+      {
+        "cod": "5.2",
+        "titulo": "Abordagem por léxicos"
+      },
+      {
+        "cod": "5.3",
+        "titulo": "Modelos supervisionados"
+      },
+      {
+        "cod": "5.4",
+        "titulo": "Limitações: ironia, negação e linguagem informal"
+      },
+      {
+        "cod": "5.5",
+        "titulo": "Sentimento textual não é emoção humana"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "titulo": "Classificação automática de textos",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "6.1",
+        "titulo": "Classificação supervisionada: treino e teste"
+      },
+      {
+        "cod": "6.2",
+        "titulo": "Naive Bayes"
+      },
+      {
+        "cod": "6.3",
+        "titulo": "Regressão logística"
+      },
+      {
+        "cod": "6.4",
+        "titulo": "Matriz de confusão, precisão, recall e F1"
+      },
+      {
+        "cod": "6.5",
+        "titulo": "Overfitting e vazamento de dados"
+      },
+      {
+        "cod": "6.6",
+        "titulo": "Introdução a Transformers"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "titulo": "Modelagem de tópicos",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "7.1",
+        "titulo": "Descoberta de assuntos em grandes coleções"
+      },
+      {
+        "cod": "7.2",
+        "titulo": "Agrupamento textual"
+      },
+      {
+        "cod": "7.3",
+        "titulo": "Latent Dirichlet Allocation (LDA)"
+      },
+      {
+        "cod": "7.4",
+        "titulo": "Interpretação e limitações dos tópicos"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "titulo": "Reconhecimento de entidades nomeadas",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "8.1",
+        "titulo": "NER: pessoas, organizações, locais e datas"
+      },
+      {
+        "cod": "8.2",
+        "titulo": "Modelos de identificação de entidades"
+      },
+      {
+        "cod": "8.3",
+        "titulo": "Erros comuns e ambiguidades"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "titulo": "Desinformação e análise crítica",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "9.1",
+        "titulo": "Circulação de desinformação na pandemia"
+      },
+      {
+        "cod": "9.2",
+        "titulo": "Características linguísticas de conteúdos enganosos"
+      },
+      {
+        "cod": "9.3",
+        "titulo": "Limites dos classificadores e viés de datasets"
+      },
+      {
+        "cod": "9.4",
+        "titulo": "Checagem de fatos e avaliação crítica de evidências"
+      },
+      {
+        "cod": "9.5",
+        "titulo": "Ética e responsabilidade em IA"
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "titulo": "Projeto prático final",
+    "tipo": "modulo",
+    "prova": true,
+    "aulas": [
+      {
+        "cod": "10.1",
+        "titulo": "Selecionar e inspecionar o corpus"
+      },
+      {
+        "cod": "10.2",
+        "titulo": "Limpeza e extração de termos"
+      },
+      {
+        "cod": "10.3",
+        "titulo": "Análise, visualização e interpretação"
+      },
+      {
+        "cod": "10.4",
+        "titulo": "Limitações e possíveis vieses"
+      }
+    ]
+  }
+]

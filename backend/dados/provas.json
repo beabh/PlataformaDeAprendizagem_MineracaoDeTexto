@@ -1,0 +1,107 @@
+{
+  "1": {
+    "titulo": "Prova do Módulo 1 · Introdução à mineração de texto",
+    "questoes": [
+      {
+        "enunciado": "Qual exemplo representa um dado estruturado?",
+        "opcoes": [
+          "Planilha com colunas de município, data e número de casos",
+          "Comunicado oficial em texto corrido",
+          "Vídeo de uma coletiva de imprensa"
+        ],
+        "correta": 0,
+        "explicacao": "Os campos têm formato fixo, como as colunas de uma planilha. Por isso o dado é estruturado."
+      },
+      {
+        "enunciado": "Por que contar palavras frequentes não comprova que uma notícia é verdadeira?",
+        "opcoes": [
+          "Porque palavras frequentes são sempre erradas",
+          "Porque a frequência mede repetição, não veracidade",
+          "Porque computadores não conseguem contar palavras"
+        ],
+        "correta": 1,
+        "explicacao": "A contagem descreve o texto. Verificar fatos exige outras fontes e análise crítica."
+      },
+      {
+        "enunciado": "Qual afirmação descreve melhor a relação entre mineração de texto e PLN?",
+        "opcoes": [
+          "Não há relação entre as duas áreas",
+          "PLN é uma técnica de visualização de dados",
+          "A mineração de texto usa técnicas de PLN para extrair informação de textos"
+        ],
+        "correta": 2,
+        "explicacao": "PLN estuda como computadores tratam a linguagem humana, e a mineração de texto usa muitas dessas técnicas."
+      },
+      {
+        "enunciado": "Por que é preciso normalizar termos como \"Vacina\" e \"vacina\" antes de contar?",
+        "opcoes": [
+          "Porque maiúsculas nunca aparecem em textos",
+          "Porque, sem normalização, a contagem pode tratar as formas como termos diferentes",
+          "Porque a normalização aumenta o tamanho do texto"
+        ],
+        "correta": 1,
+        "explicacao": "Normalizar para minúsculas evita contar a mesma palavra como se fossem termos diferentes."
+      },
+      {
+        "enunciado": "Qual etapa costuma vir antes da análise em um processo de mineração de texto?",
+        "opcoes": [
+          "Coleta e preparação dos textos",
+          "Publicação dos resultados",
+          "Avaliação final da interpretação"
+        ],
+        "correta": 0,
+        "explicacao": "Sem coleta e preparação, a análise não tem material confiável para trabalhar."
+      },
+      {
+        "enunciado": "Qual exemplo representa um dado não estruturado?",
+        "opcoes": [
+          "Tabela com colunas de data e número de óbitos",
+          "Coleção de áudios de entrevistas com profissionais de saúde",
+          "Planilha de vacinação por município"
+        ],
+        "correta": 1,
+        "explicacao": "Um áudio não tem campos fixos, por isso é um dado não estruturado."
+      },
+      {
+        "enunciado": "Qual é o objetivo da etapa de coleta e preparação?",
+        "opcoes": [
+          "Gerar os gráficos finais",
+          "Reunir e organizar os textos que serão analisados",
+          "Escolher o nome do modelo"
+        ],
+        "correta": 1,
+        "explicacao": "A preparação organiza o corpus. Gráficos e escolha de modelo vêm depois."
+      },
+      {
+        "enunciado": "Qual afirmação sobre PLN está correta?",
+        "opcoes": [
+          "PLN estuda apenas imagens",
+          "PLN trata da linguagem humana por computadores",
+          "PLN dispensa qualquer tratamento do texto"
+        ],
+        "correta": 1,
+        "explicacao": "PLN é a área que estuda como computadores processam a linguagem humana."
+      },
+      {
+        "enunciado": "Um estudo conta palavras de 100 notícias e encontra \"leitos\" entre as mais frequentes. O que isso permite concluir?",
+        "opcoes": [
+          "Que a falta de leitos está comprovada",
+          "Que o tema \"leitos\" aparece com frequência, sem comprovar a situação real",
+          "Que as notícias são oficiais"
+        ],
+        "correta": 1,
+        "explicacao": "A frequência indica um tema recorrente. Para afirmar a situação real, seria preciso outra evidência."
+      },
+      {
+        "enunciado": "Qual etapa costuma vir depois da análise?",
+        "opcoes": [
+          "Interpretação dos resultados com leitura crítica",
+          "Coleta dos textos",
+          "Normalização"
+        ],
+        "correta": 0,
+        "explicacao": "Depois da análise, os resultados precisam ser interpretados considerando limitações e possíveis vieses."
+      }
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "1.1": [
+    {
+      "tipo": "escolha",
+      "enunciado": "Em um corpus de notícias, cada notícia individual é chamada de:",
+      "opcoes": [
+        "Token",
+        "Documento",
+        "Stopword"
+      ],
+      "correta": 1,
+      "explicacao": "Cada texto individual é um documento. O conjunto de documentos é o corpus."
+    },
+    {
+      "tipo": "digitar",
+      "enunciado": "Como se chama a unidade que resulta de separar um texto em partes, geralmente palavras? Digite o termo.",
+      "respostas": [
+        "token",
+        "tokens"
+      ],
+      "explicacao": "Token é cada unidade gerada pela tokenização. Em geral é uma palavra, mas pode ser também um número ou um sinal de pontuação."
+    },
+    {
+      "tipo": "escolha",
+      "enunciado": "Qual exemplo é um dado não estruturado?",
+      "opcoes": [
+        "Planilha de casos por município",
+        "Comunicado oficial em texto corrido",
+        "Tabela de vacinação por data"
+      ],
+      "correta": 1,
+      "explicacao": "Texto corrido não tem campos fixos, por isso é um dado não estruturado."
+    },
+    {
+      "tipo": "digitar",
+      "enunciado": "A frequência de um termo em notícias comprova que o fato descrito é verdadeiro? Responda com sim ou não.",
+      "respostas": [
+        "nao",
+        "não"
+      ],
+      "explicacao": "Frequência não é verificação de fatos. Para comprovar uma informação é preciso consultar outras fontes e fazer análise crítica."
+    }
+  ],
+  "P.1": [
+    {
+      "tipo": "digitar",
+      "enunciado": "Qual é o resultado de len('Covid-19')? Digite apenas o número.",
+      "respostas": [
+        "8"
+      ],
+      "explicacao": "A função len() conta todos os caracteres: C, o, v, i, d, o hífen, 1 e 9. São 8."
+    },
+    {
+      "tipo": "digitar",
+      "enunciado": "Qual é o resultado de print('vacina'.upper())? Digite exatamente o que aparece na tela.",
+      "respostas": [
+        "VACINA"
+      ],
+      "explicacao": "O método upper() converte todas as letras para maiúsculas."
+    },
+    {
+      "tipo": "escolha",
+      "enunciado": "Qual trecho de código divide o texto 'casos graves' em tokens?",
+      "opcoes": [
+        "'casos graves'.split()",
+        "'casos graves'.upper()",
+        "'casos graves'.strip()"
+      ],
+      "correta": 0,
+      "explicacao": "split() separa o texto em partes, por espaço por padrão, e devolve uma lista de tokens."
+    }
+  ]
+}
