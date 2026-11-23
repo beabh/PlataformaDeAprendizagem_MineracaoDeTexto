@@ -55,11 +55,7 @@
       <div class="container">
         <p class="migalhas"><a href="trilha.html" data-manter-sessao>Trilha</a> / Classificação</p>
         <h1 class="titulo-pagina">Classificação da turma</h1>
-        <p class="subtitulo">Quem tem mais pontos fica em cima. A pontuação é o total de pontos ganhos menos os pontos perdidos.</p>
-
-        <div class="aviso-protótipo">
-          Protótipo: a classificação de verdade depende do servidor e dos estudantes da turma. Aqui aparece só a sua linha, com os pontos salvos neste navegador.
-        </div>
+        <p class="subtitulo" id="turma-nome-linha">Quem tem mais pontos fica em cima. A pontuação é o total de pontos ganhos menos os pontos perdidos.</p>
 
         <section class="placar regra-ranking" aria-labelledby="titulo-regras">
           <h2 id="titulo-regras" class="secao-titulo">Como a posição é definida</h2>
@@ -77,18 +73,10 @@
             <thead>
               <tr><th scope="col">Posição</th><th scope="col">Estudante</th><th scope="col">Pontuação</th><th scope="col">Aulas concluídas</th><th scope="col">Provas aprovadas</th></tr>
             </thead>
-            <tbody>
-              <tr class="linha-voce">
-                <td data-posicao-voce>1</td>
-                <td><strong>Você</strong> <span class="selo destaque">sua linha</span></td>
-                <td data-total-voce>0</td>
-                <td data-aulas-voce>0</td>
-                <td data-provas-voce>0</td>
-              </tr>
-            </tbody>
+            <tbody id="corpo-ranking"></tbody>
           </table>
         </div>
-        <p class="apoio">Os outros estudantes aparecem aqui quando a turma estiver cadastrada no servidor. Nenhuma pontuação foi inventada para preencher a lista.</p>
+        <p class="apoio">Só aparecem estudantes da mesma turma, com o nome abreviado.</p>
 
         <div style="margin-top:1.5rem">
           <a class="btn btn-primario" href="trilha.html" data-manter-sessao>Voltar à trilha e continuar</a>
@@ -107,9 +95,8 @@
   <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
   <p id="mensagem-global" role="status" class="sr-only"></p>
   <script src="js/comum.js"></script>
-  <script src="js/progresso.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/estados.js"></script>
   <script src="js/classificacao.js"></script>
-  <script src="js/sessao.js"></script>
 </body>
 </html>

@@ -58,7 +58,8 @@
 
         <section aria-labelledby="dados-cert">
           <h2 id="dados-cert" class="secao-titulo">Dados para emissão</h2>
-          <form class="formulario" action="#" onsubmit="return false;">
+          <div id="estado-cert" role="status" class="mensagem" hidden></div>
+          <form id="form-certificado" class="formulario" action="#" novalidate>
             <div class="campo">
               <label for="cert-nome">Nome completo</label>
               <input id="cert-nome" name="nome" type="text" autocomplete="name" maxlength="120" aria-describedby="ajuda-nome" />
@@ -72,7 +73,7 @@
             <div class="campo">
               <label for="cert-cpf">CPF</label>
               <input id="cert-cpf" name="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" autocomplete="off" aria-describedby="ajuda-cpf" />
-              <small id="ajuda-cpf">Usado somente para emitir o certificado. Nesta versão do protótipo ele não é gravado.</small>
+              <small id="ajuda-cpf">Usado somente para emitir o certificado. É guardado de forma cifrada e usado só para emitir o certificado.</small>
             </div>
             <div>
               <button class="btn btn-escuro" type="submit" aria-disabled="true" disabled>Solicitar certificado</button>
@@ -107,7 +108,7 @@
   <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
   <p id="mensagem-global" role="status" class="sr-only"></p>
   <script src="js/comum.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/certificado.js"></script>
-  <script src="js/sessao.js"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
-/* Página do programa: mostra a situação de cada módulo com ícone, texto e motivo.
-   Princípios aplicados: visibilidade do progresso, feedback imediato, explicação de bloqueios
-   e confirmação em duas etapas para ações destrutivas. */
+/* Página do programa: situação de cada módulo, com motivo e ação única por linha.
+   Os estados vêm de /api/trilha. */
 (function () {
   'use strict';
 
@@ -15,15 +14,9 @@
     aviso.hidden = false;
   }
 
-  function anteriorGatilho(id) {
-    var lista = window.PLN.CATALOGO.filter(function (m) { return m.tipo === 'modulo'; });
-    var pos = lista.findIndex(function (m) { return m.id === id; });
-    return pos > 0 ? lista[pos - 1] : null;
-  }
-
-  function celulaComTexto(texto, classe) {
+  function celulaComTexto(texto) {
     var p = document.createElement('p');
-    p.className = classe || 'apoio';
+    p.className = 'apoio';
     p.textContent = texto;
     return p;
   }
@@ -45,26 +38,25 @@
   }
 
   // Um botão por módulo: Começar/Continuar (principal), Revisar (secundário) ou Bloqueado (desabilitado)
-  function botaoDeAcao(id, tipo, concluidas) {
+  function botaoDeAcao(m) {
+    var proxima = m.aulas.filter(function (a) { return a.estado !== 'concluida'; })[0];
     var a;
-    if (tipo === 'disponivel' || tipo === 'andamento') {
-      var prox = window.PLN.proximaAulaDoModulo(id);
-      var iniciou = concluidas > 0;
+    if (m.estado === 'disponivel' || m.estado === 'andamento') {
       a = document.createElement('a');
-      a.href = prox ? 'aula.html?aula=' + encodeURIComponent(prox) : 'trilha.html#u-' + id;
+      a.href = proxima ? 'aula.html?aula=' + encodeURIComponent(proxima.codigo) : 'trilha.html#u-' + m.codigo;
       a.className = 'btn btn-primario btn-compacto';
-      a.textContent = prox ? (iniciou ? 'Continuar' : 'Começar') : 'Revisar';
+      a.textContent = proxima ? (m.aulas_concluidas > 0 ? 'Continuar' : 'Começar') : 'Revisar';
       a.setAttribute('data-manter-sessao', '');
-      a.setAttribute('aria-label', (prox ? (iniciou ? 'Continuar o módulo ' : 'Começar o módulo ') : 'Revisar o módulo ') + id);
+      a.setAttribute('aria-label', (proxima ? (m.aulas_concluidas > 0 ? 'Continuar o módulo ' : 'Começar o módulo ') : 'Revisar o módulo ') + m.codigo);
       return a;
     }
-    if (tipo === 'concluido') {
+    if (m.estado === 'concluido') {
       a = document.createElement('a');
-      a.href = 'trilha.html#u-' + id;
+      a.href = 'trilha.html#u-' + m.codigo;
       a.className = 'btn btn-secundario btn-compacto';
       a.textContent = 'Revisar';
       a.setAttribute('data-manter-sessao', '');
-      a.setAttribute('aria-label', 'Revisar o módulo ' + id);
+      a.setAttribute('aria-label', 'Revisar o módulo ' + m.codigo);
       return a;
     }
     a = document.createElement('span');
@@ -74,57 +66,55 @@
     return a;
   }
 
-  function atualizar() {
-    var P = window.PLN;
+  function atualizar(trilha) {
+    var modulos = {};
+    var ordem = trilha.modulos.filter(function (m) { return m.tipo === 'modulo'; });
+    trilha.modulos.forEach(function (m) { modulos[m.codigo] = m; });
 
     document.querySelectorAll('tr[data-modulo]').forEach(function (linha) {
       var id = linha.getAttribute('data-modulo');
-      var m = P.moduloPorId(id);
+      var m = modulos[id];
+      if (!m) return;
       var total = m.aulas.length;
-      var concluidas = m.aulas.filter(function (a) { return P.aulaConcluida(a.cod); }).length;
+      var concluidas = m.aulas_concluidas;
       var pct = total ? Math.round((concluidas / total) * 100) : 0;
 
-      // Aulas: contagem e barra de progresso
       preencher(linha.querySelector('[data-aulas]'), [
         (function () { var s = document.createElement('span'); s.textContent = concluidas + ' de ' + total; return s; })(),
         mini(pct)
       ]);
 
-      // Prova
       var celProva = linha.querySelector('[data-prova]');
       if (m.prova) {
-        var estado = P.estadoProva(id);
-        var nodesProva = [UI.selo(PROVA_TIPO[estado], PROVA_TEXTO[estado])];
+        var estado = m.prova.estado;
+        var nodes = [UI.selo(PROVA_TIPO[estado], PROVA_TEXTO[estado])];
         if (estado === 'bloqueada' && concluidas < total) {
-          nodesProva.push(celulaComTexto('Termine as ' + (total - concluidas) + ' aula(s) restante(s).'));
+          nodes.push(celulaComTexto('Termine as ' + (total - concluidas) + ' aula(s) restante(s).'));
         }
-        preencher(celProva, nodesProva);
+        preencher(celProva, nodes);
       } else {
         celProva.textContent = '—';
       }
 
-      // Situação e motivo
-      var tipoSit = P.estadoModulo(id);
-      var nodesSit = [UI.selo(tipoSit)];
-      if (tipoSit === 'bloqueado') {
-        var ant = anteriorGatilho(id);
-        nodesSit.push(celulaComTexto(ant ? 'Conclua a prova do módulo ' + ant.id + ' para liberar.' : 'Conclua o módulo anterior para liberar.'));
-      } else if (tipoSit === 'disponivel') {
+      var nodesSit = [UI.selo(m.estado)];
+      var idx = ordem.indexOf(m);
+      var anterior = idx > 0 ? ordem[idx - 1] : null;
+      if (m.estado === 'bloqueado') {
+        nodesSit.push(celulaComTexto(anterior ? 'Conclua a prova do módulo ' + anterior.codigo + ' para liberar.' : 'Conclua o módulo anterior para liberar.'));
+      } else if (m.estado === 'disponivel') {
         nodesSit.push(celulaComTexto('Pronto para começar. Abra a primeira aula.'));
-      } else if (tipoSit === 'andamento') {
+      } else if (m.estado === 'andamento') {
         nodesSit.push(celulaComTexto('Continue de onde parou.'));
-      } else if (tipoSit === 'concluido') {
+      } else if (m.estado === 'concluido') {
         nodesSit.push(celulaComTexto('Módulo concluído.'));
       }
       preencher(linha.querySelector('[data-status]'), nodesSit);
 
-      // Ação: um único botão por linha, sempre na mesma coluna
       var celAcao = linha.querySelector('[data-acao]');
-      if (celAcao) preencher(celAcao, [botaoDeAcao(id, tipoSit, concluidas)]);
+      if (celAcao) preencher(celAcao, [botaoDeAcao(m)]);
 
-      // Link do tema: só abre módulos liberados
       var link = linha.querySelector('[data-link-modulo]');
-      if (P.moduloLiberado(id)) {
+      if (m.liberado) {
         link.setAttribute('href', 'trilha.html#u-' + id);
         link.removeAttribute('aria-disabled');
       } else {
@@ -132,58 +122,26 @@
         link.setAttribute('aria-disabled', 'true');
       }
     });
-  }
 
-  function ligarEventos() {
-    // Clique em módulo bloqueado: explica o motivo em vez de falhar em silêncio
+    // Clique em módulo bloqueado explica o motivo
     document.querySelectorAll('a[data-link-modulo]').forEach(function (link) {
       link.addEventListener('click', function (ev) {
         var id = link.getAttribute('data-link-modulo');
-        if (!window.PLN.moduloLiberado(id)) {
+        var m = modulos[id];
+        if (m && !m.liberado) {
           ev.preventDefault();
-          var ant = anteriorGatilho(id);
+          var idx = ordem.indexOf(m);
+          var anterior = idx > 0 ? ordem[idx - 1] : null;
           avisar('O módulo ' + id + ' ainda está bloqueado. ' +
-            (ant ? 'Aprove a prova do módulo ' + ant.id + ' para liberá-lo.' : 'Conclua o módulo anterior.'), 'erro');
+            (anterior ? 'Aprove a prova do módulo ' + anterior.codigo + ' para liberá-lo.' : 'Conclua o módulo anterior.'), 'erro');
         }
       });
     });
-
-    // Zerar progresso: confirmação em duas etapas, porque a ação não pode ser desfeita
-    var zerar = document.querySelector('[data-zerar]');
-    var cancelar = document.querySelector('[data-cancelar-zerar]');
-    if (zerar) {
-      var pendente = false;
-      zerar.addEventListener('click', function () {
-        if (!pendente) {
-          pendente = true;
-          zerar.textContent = 'Sim, apagar meu progresso';
-          zerar.className = 'btn btn-escuro';
-          if (cancelar) cancelar.hidden = false;
-          avisar('Esta ação apaga aulas, provas e XP salvos neste navegador. Confirme se tiver certeza.', 'erro');
-          return;
-        }
-        window.PLN.zerar();
-        pendente = false;
-        zerar.textContent = 'Zerar progresso deste protótipo';
-        zerar.className = 'btn-fantasma';
-        if (cancelar) cancelar.hidden = true;
-        atualizar();
-        avisar('Progresso apagado neste navegador.', 'ok');
-      });
-      if (cancelar) {
-        cancelar.addEventListener('click', function () {
-          pendente = false;
-          zerar.textContent = 'Zerar progresso deste protótipo';
-          zerar.className = 'btn-fantasma';
-          cancelar.hidden = true;
-          avisar('Nada foi apagado.', 'info');
-        });
-      }
-    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    atualizar();
-    ligarEventos();
+    window.API.get('/api/trilha').then(atualizar).catch(function (err) {
+      avisar(err.message, 'erro');
+    });
   });
 })();

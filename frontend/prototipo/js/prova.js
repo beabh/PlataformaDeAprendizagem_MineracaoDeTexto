@@ -1,7 +1,9 @@
-/* Página da prova do módulo: exibe as questões, corrige e registra o resultado.
-   Usa textContent para todo conteúdo dinâmico. */
+/* Página da prova do módulo. As questões e o gabarito ficam no servidor:
+   o navegador envia as respostas e recebe a correção (/api/provas/{modulo}). */
 (function () {
   'use strict';
+
+  var modulo = new URLSearchParams(window.location.search).get('modulo') || '';
 
   function el(tag, attrs, texto) {
     var e = document.createElement(tag);
@@ -24,8 +26,7 @@
     return a;
   }
 
-  function desenharFormulario(id, area, resumo) {
-    var prova = window.PROVAS[id];
+  function desenharFormulario(prova, area, aprovadaAntes) {
     area.innerHTML = '';
     var form = el('form', { class: 'formulario', novalidate: '' });
     form.style.maxWidth = 'none';
@@ -35,8 +36,7 @@
       fs.appendChild(el('legend', null, (i + 1) + '. ' + q.enunciado));
       q.opcoes.forEach(function (texto, j) {
         var lab = el('label', { class: 'opcao' });
-        var input = el('input', { type: 'radio', name: 'q' + i, value: String(j) });
-        lab.appendChild(input);
+        lab.appendChild(el('input', { type: 'radio', name: 'q' + i, value: String(j) }));
         lab.appendChild(document.createTextNode(' ' + texto));
         fs.appendChild(lab);
       });
@@ -47,7 +47,9 @@
     });
 
     var botoes = el('div', { class: 'acoes' });
-    botoes.appendChild(el('button', { class: 'btn btn-escuro', type: 'submit' }, 'Corrigir prova'));
+    var corrigir = el('button', { class: 'btn btn-escuro', type: 'submit' }, 'Corrigir prova');
+    if (aprovadaAntes) corrigir.disabled = true;
+    botoes.appendChild(corrigir);
     form.appendChild(botoes);
     var placar = el('p', { role: 'status', 'data-placar': '' });
     placar.style.marginTop = '.8rem';
@@ -65,73 +67,71 @@
         placar.textContent = 'Responda todas as questões antes de corrigir. Faltam ' + faltam + '.';
         return;
       }
-
-      var acertos = 0;
-      prova.questoes.forEach(function (q, i) {
-        var f = form.querySelector('[data-feedback="' + i + '"]');
-        var ok = respostas[i] === q.correta;
-        if (ok) acertos += 1;
-        f.hidden = false;
-        f.className = 'feedback ' + (ok ? 'ok' : 'erro');
-        f.textContent = (ok ? 'Correta. ' : 'Incorreta. ') + 'Resposta certa: ' + q.opcoes[q.correta] + '. ' + q.explicacao;
-        form.querySelectorAll('input[name="q' + i + '"]').forEach(function (inp) { inp.disabled = true; });
+      corrigir.disabled = true;
+      window.API.post('/api/provas/' + encodeURIComponent(modulo) + '/tentativas', { respostas: respostas }).then(function (r) {
+        mostrarResultado(form, prova, r, placar, area);
+      }).catch(function (err) {
+        placar.className = 'mensagem erro';
+        placar.textContent = err.message;
+        corrigir.disabled = aprovadaAntes;
       });
-
-      var registro = window.PLN.registrarProva(id, acertos, prova.questoes.length);
-      var minimo = Math.ceil(window.PLN.APROVACAO * prova.questoes.length);
-      placar.className = 'mensagem ' + (acertos >= minimo ? 'ok' : 'erro');
-      placar.textContent = 'Você acertou ' + acertos + ' de ' + prova.questoes.length + '. ' +
-        (acertos >= minimo
-          ? 'Prova aprovada. O próximo módulo já está liberado na trilha.'
-          : 'Não atingiu o mínimo de ' + minimo + '. Você pode refazer a prova.') +
-        (registro ? ' Tentativa ' + registro.tentativas + '.' : '');
-
-      var refazer = el('button', { class: 'btn-fantasma', type: 'button', style: 'margin-top:.8rem' }, 'Refazer a prova');
-      refazer.addEventListener('click', function () { desenharFormulario(id, area, resumo); });
-      placar.parentNode.appendChild(refazer);
-      if (acertos >= minimo) placar.parentNode.appendChild(linkTrilha('Ir para a trilha'));
     });
 
     area.appendChild(form);
+  }
+
+  function mostrarResultado(form, prova, r, placar, area) {
+    r.detalhe.forEach(function (d) {
+      var f = form.querySelector('[data-feedback="' + (d.ordem - 1) + '"]');
+      f.hidden = false;
+      f.className = 'feedback ' + (d.acertou ? 'ok' : 'erro');
+      f.textContent = (d.acertou ? 'Correta. ' : 'Incorreta. ') + 'Resposta certa: ' +
+        prova.questoes[d.ordem - 1].opcoes[d.correta] + '. ' + d.explicacao;
+      form.querySelectorAll('input[name="q' + (d.ordem - 1) + '"]').forEach(function (inp) { inp.disabled = true; });
+    });
+
+    placar.className = 'mensagem ' + (r.aprovada ? 'ok' : 'erro');
+    placar.textContent = 'Você acertou ' + r.acertos + ' de ' + r.total + '. ' +
+      (r.aprovada
+        ? 'Prova aprovada. O próximo módulo já está liberado na trilha.'
+        : 'Não atingiu o mínimo de ' + r.minimo + '. Você pode refazer a prova.') +
+      (r.ganho ? ' Você ganhou ' + r.ganho + ' pontos.' : '');
+
+    if (!r.aprovada) {
+      var refazer = el('button', { class: 'btn-fantasma', type: 'button', style: 'margin-top:.8rem' }, 'Refazer a prova');
+      refazer.addEventListener('click', function () { window.location.reload(); });
+      placar.parentNode.appendChild(refazer);
+    } else {
+      placar.parentNode.appendChild(linkTrilha('Ir para a trilha'));
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     var titulo = document.getElementById('titulo-prova');
     var resumo = document.getElementById('resumo-prova');
     var area = document.getElementById('area-prova');
-    var id = new URLSearchParams(window.location.search).get('modulo') || '';
-    var modulo = window.PLN.moduloPorId(id);
 
-    if (!modulo || !modulo.prova) {
-      titulo.textContent = 'Prova não encontrada';
-      resumo.textContent = 'Este módulo não tem prova.';
-      mensagem(area, 'Verifique o link ou volte à trilha para escolher um módulo.', 'erro', linkTrilha());
-      return;
-    }
-
-    var banco = window.PROVAS[id];
-    titulo.textContent = banco ? banco.titulo : 'Prova do Módulo ' + id + ' · ' + modulo.titulo;
-    resumo.textContent = banco
-      ? banco.questoes.length + ' questões de múltipla escolha. Mínimo para aprovação: ' +
-        Math.ceil(window.PLN.APROVACAO * banco.questoes.length) + '.'
-      : 'Prova ainda não disponível.';
-
-    if (!banco) {
-      mensagem(area, 'O banco de questões deste módulo ainda está em elaboração.', 'info', linkTrilha());
-      return;
-    }
-
-    if (!window.PLN.provaLiberada(id)) {
-      mensagem(area, 'A prova libera quando todas as aulas do módulo forem concluídas.', 'info', linkTrilha('Voltar à trilha para estudar'));
-      return;
-    }
-
-    desenharFormulario(id, area, resumo);
-
-    if (window.PLN.provaAprovada(id)) {
-      var p = window.PLN.estado().provas[id];
-      var aviso = el('p', { class: 'mensagem ok' }, 'Você já foi aprovado nesta prova (melhor resultado: ' + p.melhor + ' de ' + banco.questoes.length + '). Você pode refazê-la.');
-      area.insertBefore(aviso, area.firstChild);
-    }
+    window.API.get('/api/provas/' + encodeURIComponent(modulo)).then(function (prova) {
+      titulo.textContent = 'Prova do Módulo ' + prova.modulo.codigo + ' · ' + prova.modulo.titulo;
+      resumo.textContent = prova.total + ' questões de múltipla escolha. Mínimo para aprovação: ' + prova.minimo + '.';
+      if (prova.aprovada) {
+        area.appendChild(el('p', { class: 'mensagem ok' }, 'Você já foi aprovado nesta prova (melhor resultado: ' + prova.melhor + ' de ' + prova.total + ').'));
+      }
+      var form = el('div');
+      area.appendChild(form);
+      desenharFormulario(prova, form, prova.aprovada);
+    }).catch(function (err) {
+      if (err.status === 403) {
+        titulo.textContent = 'Prova ainda não liberada';
+        resumo.textContent = err.message;
+        mensagem(area, 'Conclua as aulas do módulo para liberar a prova.', 'info', linkTrilha('Voltar à trilha para estudar'));
+      } else if (err.status === 404) {
+        titulo.textContent = 'Prova não encontrada';
+        resumo.textContent = 'Este módulo não tem prova.';
+        mensagem(area, 'Verifique o link ou volte à trilha para escolher um módulo.', 'erro', linkTrilha());
+      } else {
+        mensagem(area, err.message, 'erro', linkTrilha());
+      }
+    });
   });
 })();

@@ -62,41 +62,21 @@
       }
     });
   });
-  // ---------- Perfil e conta: o nome de exibição salvo aparece no rodapé do menu ----------
-  // Os dados ficam no navegador (protótipo). Ordem do nome: salvo no perfil, depois ?nome= da URL, depois "Estudante".
-  var CHAVE_PERFIL = 'pln-perfil';
-
-  var lerPerfil = function () {
-    try { return JSON.parse(localStorage.getItem(CHAVE_PERFIL)) || {}; } catch (e) { return {}; }
+  // ---------- Conta: nome e iniciais vêm do servidor (/api/me) ----------
+  var preencherConta = function () {
+    if (!window.API || !document.querySelector('[data-nome-conta], [data-nome], [data-iniciais-conta]')) return;
+    window.API.get('/api/me').then(function (me) {
+      var nome = me.nome || 'Estudante';
+      var partes = nome.split(/\s+/).filter(Boolean);
+      var iniciais = partes.length
+        ? (partes[0].charAt(0) + (partes.length > 1 ? partes[partes.length - 1].charAt(0) : '')).toUpperCase()
+        : 'E';
+      document.querySelectorAll('[data-nome-conta], [data-nome]').forEach(function (el) { el.textContent = nome; });
+      document.querySelectorAll('[data-iniciais-conta]').forEach(function (el) { el.textContent = iniciais; });
+    }).catch(function () { /* sem sessão, o api.js leva para o login */ });
   };
-
-  var iniciais = function (nome) {
-    var partes = nome.split(/\s+/).filter(Boolean);
-    var primeira = partes[0] ? partes[0].charAt(0) : 'E';
-    var ultima = partes.length > 1 ? partes[partes.length - 1].charAt(0) : '';
-    return (primeira + ultima).toUpperCase();
-  };
-
-  var aplicarConta = function () {
-    var salvo = (lerPerfil().nome || '').trim().slice(0, 60);
-    var pelaUrl = (new URLSearchParams(window.location.search).get('nome') || '').trim().slice(0, 60);
-    var nome = salvo || pelaUrl || 'Estudante';
-    document.querySelectorAll('[data-nome-conta]').forEach(function (el) { el.textContent = nome; });
-    document.querySelectorAll('[data-iniciais-conta]').forEach(function (el) { el.textContent = iniciais(nome); });
-  };
-
-  var gravarPerfil = function (dados) {
-    try {
-      localStorage.setItem(CHAVE_PERFIL, JSON.stringify(dados));
-    } catch (e) {
-      return false;
-    }
-    aplicarConta();
-    return true;
-  };
-
-  window.PLNPerfil = { ler: lerPerfil, gravar: gravarPerfil };
-  aplicarConta();
+  document.addEventListener('DOMContentLoaded', preencherConta);
+  window.PLNConta = { atualizar: preencherConta };
 
   // ---------- Logo da instituição: se não carregar, mostra o nome no lugar ----------
   function trocarPorTexto(img) {
