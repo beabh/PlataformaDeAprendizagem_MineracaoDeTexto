@@ -37,11 +37,11 @@ Se a transação falhar, nada é gravado. Assim a pontuação não fica pela met
 
 **Concluir a aula.** `POST /api/aulas/{cod}/concluir` confere se todos os exercícios da aula têm `resultado_exercicio`. Se faltar algum, responde com erro e a lista do que falta. Se estiver tudo certo, grava a `conclusao_aula` e cria o movimento de +10 da aula. A conclusão já vem do servidor, então o navegador não pode marcar uma aula como concluída sozinho.
 
-**Fazer a prova.** `POST /api/modulos/{id}/prova` recebe as respostas, corrige no servidor e grava `prova`. Na primeira aprovação, cria o movimento de +50. A prova só aceita o envio se todas as aulas do módulo estiverem concluídas.
+**Fazer a prova.** `POST /api/provas/{modulo}/tentativas` recebe as respostas, corrige no servidor e grava `prova`. Na primeira aprovação, cria o movimento de +50. A prova só aceita o envio se todas as aulas do módulo estiverem concluídas.
 
-**Ver o placar.** `GET /api/placar?aula={cod}` e `GET /api/me/pontos` somam os movimentos. A trilha usa `/api/me/pontos` para mostrar ganhos, perdidos e total.
+**Ver o placar.** `GET /api/aulas/{cod}/placar` soma os movimentos da aula, e `GET /api/me/pontos` soma os movimentos do estudante com o histórico. A trilha recebe o total em `GET /api/trilha`.
 
-**Ver a classificação.** `GET /api/ranking?turma={id}` devolve a lista ordenada (ver seção 4).
+**Ver a classificação.** `GET /api/ranking` devolve a lista da turma do próprio estudante, ordenada (ver seção 4).
 
 ## 3. Regras que só o servidor aplica
 
@@ -74,14 +74,25 @@ ORDER BY total DESC, :desempate;
 
 | Método e caminho | Faz |
 |---|---|
+| `GET /auth/google` | Inicia o login com o Google. |
+| `GET /auth/google/retorno` | Recebe o retorno do Google, confere o e-mail verificado e abre a sessão. |
+| `GET /auth/desenvolvimento` | Login de teste sem Google. Responde 404 em produção. |
+| `POST /auth/sair` | Encerra a sessão. |
+| `GET /api/me` | Dados do estudante da sessão atual. |
+| `GET /api/trilha` | Módulos, aulas, estados, pontos e próxima aula. |
 | `GET /api/aulas/{cod}` | Aula e exercícios sem gabarito, com o estado de cada um. |
 | `POST /api/exercicios/{id}/tentativas` | Corrige a resposta e grava a tentativa. |
 | `POST /api/exercicios/{id}/pulo` | Registra o pulo e a perda. |
 | `POST /api/aulas/{cod}/concluir` | Conclui a aula se todos os exercícios tiverem resultado. |
-| `POST /api/modulos/{id}/prova` | Corrige a prova e grava o resultado. |
-| `GET /api/placar?aula={cod}` | Ganhos, perdas e saldo da aula. |
+| `GET /api/aulas/{cod}/placar` | Ganhos, perdas e saldo da aula. |
+| `GET /api/provas/{modulo}` | Questões da prova, sem gabarito, e a situação da prova. |
+| `POST /api/provas/{modulo}/tentativas` | Corrige a prova e grava o resultado. |
 | `GET /api/me/pontos` | Ganhos, perdidos, total e histórico. |
-| `GET /api/ranking?turma={id}` | Classificação da turma. |
+| `GET /api/ranking` | Classificação da turma do estudante. |
+| `GET /api/perfil` e `PUT /api/perfil` | Lê e altera o nome de exibição, a meta em minutos e o curso. |
+| `GET /api/certificado` e `POST /api/certificado` | Situação do certificado e emissão. |
+| `GET /api/me/exportar` | Exporta os dados do estudante (LGPD). |
+| `DELETE /api/me` | Exclui a conta e anonimiza os dados. |
 
 Erros seguem um formato único: `{ "codigo": "...", "mensagem": "..." }`. O navegador mostra a mensagem ao lado da ação que falhou, não em um alerta.
 
