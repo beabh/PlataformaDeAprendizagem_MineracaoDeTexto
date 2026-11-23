@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Início · Mineração de Texto e PLN · COVID-19 (protótipo)</title>
+  <meta name="description" content="Plataforma educacional de Mineração de Texto e Processamento de Linguagem Natural, com estudo de caso da pandemia de COVID-19." />
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <a class="logo-area" href="index.html" aria-label="Início">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
+      </a>
+      <button class="btn btn-secundario menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+      <nav class="principal" id="menu-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html" aria-current="page">Início</a></li>
+          <li><a href="programa.html">Programa</a></li>
+          <li><a href="sobre.html">Sobre o projeto</a></li>
+          <li><a href="laboratorio.html">Laboratório</a></li>
+        </ul>
+      </nav>
+      <div class="acoes">
+        <a class="btn btn-primario" href="login.html">Entrar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" aria-labelledby="titulo-hero">
+      <div class="container">
+        <p class="eyebrow">Disciplina · Engenharia de Software</p>
+        <h1 id="titulo-hero">Mineração de Texto e Processamento de Linguagem Natural</h1>
+        <p class="lead">
+          Uma análise da informação durante a pandemia de COVID-19. Aprenda como textos não estruturados
+          viram dados analisáveis, usando notícias, comunicados e publicações da própria pandemia como exemplos.
+        </p>
+        <div class="acoes">
+          <a class="btn btn-primario" href="login.html">Começar com o Google</a>
+          <a class="btn btn-secundario" href="laboratorio.html">Experimentar o laboratório</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloco" id="contexto" aria-labelledby="titulo-contexto">
+      <div class="container grade" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items:start; gap:2.5rem">
+        <div>
+          <h2 id="titulo-contexto">Por que analisar textos durante uma crise sanitária?</h2>
+          <p class="subtitulo" style="margin-bottom:1rem">
+            Durante a pandemia, a informação circulou em volume e velocidade sem precedentes. Notas oficiais,
+            artigos científicos, reportagens e conteúdos em redes sociais chegavam ao mesmo tempo, e nem todos
+            eram confiáveis.
+          </p>
+          <p class="subtitulo" style="margin-bottom:0">
+            Técnicas de mineração de texto e PLN ajudam a organizar esse volume, identificar temas recorrentes e
+            comparar fontes. Elas não substituem a leitura crítica, e os resultados sempre têm limitações.
+          </p>
+        </div>
+        <aside class="nota" aria-label="Nota sobre os dados">
+          <strong>Sobre os dados:</strong> números epidemiológicos (casos, óbitos, vacinação) servem como
+          contexto. A mineração trabalha sobre corpus textual real, com fonte, período e licença identificados.
+        </aside>
+      </div>
+    </section>
+
+    <section class="bloco alternada" aria-labelledby="titulo-modulos">
+      <div class="container">
+        <h2 id="titulo-modulos">Como a disciplina está organizada</h2>
+        <p class="subtitulo">Dez módulos, do conceito inicial ao projeto final. Cada aula tem explicação, laboratório, recursos e questionário.</p>
+        <div class="grade">
+          <article class="card"><h3>Conteúdo progressivo</h3><p>Da introdução à mineração de texto até modelagem de tópicos e reconhecimento de entidades.</p></article>
+          <article class="card"><h3>Laboratório de texto</h3><p>Execute as etapas de pré-processamento e veja a transformação passo a passo.</p></article>
+          <article class="card"><h3>Trilha de aprendizagem</h3><p>Acompanhe seu progresso, desbloqueie módulos e receba seu certificado ao concluir.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloco" aria-labelledby="titulo-demo">
+      <div class="container">
+        <h2 id="titulo-demo">Experimente sem fazer login</h2>
+        <p class="subtitulo">Uma demonstração simplificada roda no seu navegador. Os textos não são enviados a servidores.</p>
+        <div class="card" style="max-width:720px">
+          <h3>Contagem de palavras frequentes</h3>
+          <p>Cole um texto e veja quais termos mais se repetem, depois de remover palavras comuns como "de" e "para".</p>
+          <p style="margin-top:1rem"><a class="btn btn-escuro" href="laboratorio.html">Abrir o laboratório</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-grade">
+        <div>
+          <h4>Plataforma</h4>
+          <ul>
+            <li><a href="programa.html">Programa</a></li>
+            <li><a href="laboratorio.html">Laboratório</a></li>
+            <li><a href="login.html">Entrar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Institucional</h4>
+          <ul>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="#" data-em-breve>Política de privacidade (em elaboração)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Créditos</h4>
+          <ul>
+            <li>Paleta de cores: Media Kit institucional (uso a confirmar)</li>
+            <li>Fontes de dados: a documentar</li>
+          </ul>
+        </div>
+      </div>
+      <p class="rodape-base">Protótipo de interface · Não representa a versão final da plataforma.</p>
+    </div>
+  </footer>
+
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+</body>
+</html>

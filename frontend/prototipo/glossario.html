@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossário · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <button class="menu-botao" id="menu-toggle" type="button" aria-controls="menu-lateral" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <a class="logo-area" href="painel.html" data-manter-sessao aria-label="Painel">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Área do estudante</span></div>
+      </a>
+      <div class="acoes">
+        <a class="btn btn-secundario" href="login.html">Sair</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar" id="menu-lateral" aria-label="Menu do estudante">
+    <nav aria-label="Menu do estudante">
+    <p class="grupo">Estudo</p>
+    <ul>
+    <li><a href="painel.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span>Painel</span></a></li>
+    <li><a href="trilha.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a4 4 0 0 0 0-8H8a4 4 0 0 1 0-8h8"/></svg></span><span>Trilha de aprendizagem</span></a></li>
+    <li><a href="programa.html"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><span>Programa</span></a></li>
+    <li><a href="classificacao.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span>Classificação</span></a></li>
+    </ul>
+    <p class="grupo">Ferramentas</p>
+    <ul>
+    <li><a href="laboratorio.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span>Laboratório de texto</span></a></li>
+    <li><a href="glossario.html" data-manter-sessao aria-current="page"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Glossário</span></a></li>
+    </ul>
+    <p class="grupo">Conta</p>
+    <ul>
+    <li><a href="certificado.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></span><span>Certificado</span></a></li>
+    <li><a href="perfil.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Meu perfil</span></a></li>
+    </ul>
+    </nav></aside>
+
+    <main id="conteudo" class="conteudo-app">
+      <div class="container">
+        <p class="migalhas">Glossário</p>
+        <h1 class="titulo-pagina">Glossário da disciplina</h1>
+        <p class="subtitulo">Termos usados ao longo do curso. Digite para filtrar.</p>
+
+        <div class="campo" style="max-width:420px; margin-bottom:1.5rem">
+          <label for="busca">Buscar termo</label>
+          <input id="busca" type="search" autocomplete="off" placeholder="Ex.: token, stopwords, corpus" />
+        </div>
+
+        <p id="sem-resultado" class="vazio" hidden>Nenhum termo encontrado com essa busca.</p>
+
+        <dl class="glossario" id="lista-termos">
+          <div class="termo" data-termo="corpus">
+            <dt>Corpus</dt>
+            <dd>Conjunto de textos reunido para análise, com critérios de seleção, fonte, período e licença registrados. A qualidade da análise depende da qualidade do corpus.</dd>
+          </div>
+          <div class="termo" data-termo="documento">
+            <dt>Documento</dt>
+            <dd>Unidade de texto dentro do corpus, como uma notícia, um comunicado ou um artigo.</dd>
+          </div>
+          <div class="termo" data-termo="token">
+            <dt>Token</dt>
+            <dd>Unidade em que o texto é separado depois da tokenização. Em geral é uma palavra, mas pode ser também um sinal de pontuação, um número ou um pedaço de palavra, conforme o método.</dd>
+          </div>
+          <div class="termo" data-termo="tokenizacao">
+            <dt>Tokenização</dt>
+            <dd>Processo de separar o texto em tokens. Decisões como tratar "Covid-19" como um token ou dois mudam a contagem.</dd>
+          </div>
+          <div class="termo" data-termo="normalizacao">
+            <dt>Normalização</dt>
+            <dd>Padronização do texto, como converter para minúsculas e remover pontuação, para que formas equivalentes sejam tratadas como o mesmo termo.</dd>
+          </div>
+          <div class="termo" data-termo="stopwords">
+            <dt>Stopwords</dt>
+            <dd>Palavras muito frequentes e pouco informativas para a tarefa, como "de", "a" e "para". A lista depende do idioma e do objetivo da análise.</dd>
+          </div>
+          <div class="termo" data-termo="stemming">
+            <dt>Stemming</dt>
+            <dd>Redução de palavras a um radical, por regras de corte de sufixos. É rápido, mas pode gerar radicais que não são palavras de dicionário.</dd>
+          </div>
+          <div class="termo" data-termo="lematizacao">
+            <dt>Lematização</dt>
+            <dd>Redução de uma palavra à sua forma de dicionário, chamada lema, usando análise morfológica. Exige modelos linguísticos.</dd>
+          </div>
+          <div class="termo" data-termo="frequencia">
+            <dt>Frequência absoluta e relativa</dt>
+            <dd>Frequência absoluta é o número de ocorrências de um termo. Frequência relativa é essa contagem dividida pelo total de termos.</dd>
+          </div>
+          <div class="termo" data-termo="n-grama">
+            <dt>N-grama</dt>
+            <dd>Sequência de n tokens consecutivos. Bigramas têm dois tokens e trigramas têm três.</dd>
+          </div>
+          <div class="termo" data-termo="bag-of-words">
+            <dt>Bag of Words</dt>
+            <dd>Representação em que cada documento vira uma contagem de termos, sem considerar a ordem das palavras.</dd>
+          </div>
+          <div class="termo" data-termo="vetorizacao">
+            <dt>Vetorização</dt>
+            <dd>Conversão do texto em vetores numéricos, para que os algoritmos possam trabalhar com ele.</dd>
+          </div>
+          <div class="termo" data-termo="tf-idf">
+            <dt>TF-IDF</dt>
+            <dd>Peso que combina a frequência do termo no documento (TF) com a raridade do termo no corpus (IDF). Termos muito comuns no corpus recebem peso menor.</dd>
+          </div>
+          <div class="termo" data-termo="cosseno">
+            <dt>Similaridade do cosseno</dt>
+            <dd>Medida de semelhança entre dois vetores, baseada no ângulo entre eles. Valores mais próximos de 1 indicam vetores mais parecidos.</dd>
+          </div>
+          <div class="termo" data-termo="embedding">
+            <dt>Embedding</dt>
+            <dd>Representação vetorial densa de palavras ou textos, aprendida a partir de dados, de modo que termos com usos parecidos ficam próximos no espaço vetorial.</dd>
+          </div>
+          <div class="termo" data-termo="pln">
+            <dt>PLN</dt>
+            <dd>Processamento de linguagem natural: área que estuda como computadores tratam a linguagem humana.</dd>
+          </div>
+          <div class="termo" data-termo="mineracao">
+            <dt>Mineração de texto</dt>
+            <dd>Extração de informação útil de textos não estruturados, com técnicas de PLN e, em muitos casos, aprendizado de máquina.</dd>
+          </div>
+          <div class="termo" data-termo="estruturado">
+            <dt>Dado estruturado e não estruturado</dt>
+            <dd>Dado estruturado tem campos fixos, como uma planilha. Dado não estruturado não tem esse formato, como um texto corrido, um áudio ou uma imagem.</dd>
+          </div>
+          <div class="termo" data-termo="classificacao">
+            <dt>Classificação supervisionada</dt>
+            <dd>Tarefa em que o modelo aprende a atribuir rótulos a textos a partir de exemplos já rotulados, separados em conjuntos de treino e de teste.</dd>
+          </div>
+          <div class="termo" data-termo="matriz">
+            <dt>Matriz de confusão</dt>
+            <dd>Tabela que compara as classes previstas pelo modelo com as classes reais, mostrando acertos e erros de cada tipo.</dd>
+          </div>
+          <div class="termo" data-termo="precisao-recall">
+            <dt>Precisão, recall e F1</dt>
+            <dd>Precisão mede quantas previsões positivas estavam certas. Recall mede quantos casos positivos reais foram encontrados. F1 é a média harmônica entre os dois.</dd>
+          </div>
+          <div class="termo" data-termo="overfitting">
+            <dt>Overfitting e vazamento de dados</dt>
+            <dd>Overfitting é quando o modelo memoriza o treino e generaliza mal. Vazamento de dados é quando informação do teste entra no treino, inflando os resultados.</dd>
+          </div>
+          <div class="termo" data-termo="lda">
+            <dt>LDA</dt>
+            <dd>Latent Dirichlet Allocation: modelo probabilístico que descobre tópicos em uma coleção de documentos, a partir da coocorrência de palavras.</dd>
+          </div>
+          <div class="termo" data-termo="ner">
+            <dt>NER</dt>
+            <dd>Reconhecimento de entidades nomeadas: identificação de trechos do texto que se referem a pessoas, organizações, locais e datas, entre outras categorias.</dd>
+          </div>
+          <div class="termo" data-termo="desinformacao">
+            <dt>Desinformação</dt>
+            <dd>Conteúdo falso ou enganoso divulgado, com ou sem intenção. Classificadores automáticos ajudam a triagem, mas não substituem a checagem de fatos.</dd>
+          </div>
+        </dl>
+      </div>
+    </main>
+  </div>
+
+  <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/glossario.js"></script>
+  <script src="js/sessao.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificado · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <button class="menu-botao" id="menu-toggle" type="button" aria-controls="menu-lateral" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <a class="logo-area" href="painel.html" data-manter-sessao aria-label="Painel">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Área do estudante</span></div>
+      </a>
+      <div class="acoes">
+        <a class="btn btn-secundario" href="login.html">Sair</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar" id="menu-lateral" aria-label="Menu do estudante">
+    <nav aria-label="Menu do estudante">
+    <p class="grupo">Estudo</p>
+    <ul>
+    <li><a href="painel.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span>Painel</span></a></li>
+    <li><a href="trilha.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a4 4 0 0 0 0-8H8a4 4 0 0 1 0-8h8"/></svg></span><span>Trilha de aprendizagem</span></a></li>
+    <li><a href="programa.html"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><span>Programa</span></a></li>
+    <li><a href="classificacao.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span>Classificação</span></a></li>
+    </ul>
+    <p class="grupo">Ferramentas</p>
+    <ul>
+    <li><a href="laboratorio.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span>Laboratório de texto</span></a></li>
+    <li><a href="glossario.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Glossário</span></a></li>
+    </ul>
+    <p class="grupo">Conta</p>
+    <ul>
+    <li><a href="certificado.html" data-manter-sessao aria-current="page"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></span><span>Certificado</span></a></li>
+    <li><a href="perfil.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Meu perfil</span></a></li>
+    </ul>
+    </nav></aside>
+
+    <main id="conteudo" class="conteudo-app">
+      <div class="container">
+        <p class="migalhas">Certificado</p>
+        <h1 class="titulo-pagina">Certificado de conclusão</h1>
+        <p class="subtitulo">O certificado é liberado depois que você concluir os módulos exigidos. O critério de conclusão ainda será definido pela docente.</p>
+
+        <div class="card" style="margin-bottom:1.5rem">
+          <p class="rotulo">Status</p>
+          <p class="valor" style="font-size:1.3rem">Indisponível</p>
+          <p>Nenhum módulo foi concluído ainda.</p>
+        </div>
+
+        <section aria-labelledby="dados-cert">
+          <h2 id="dados-cert" class="secao-titulo">Dados para emissão</h2>
+          <form class="formulario" action="#" onsubmit="return false;">
+            <div class="campo">
+              <label for="cert-nome">Nome completo</label>
+              <input id="cert-nome" name="nome" type="text" autocomplete="name" maxlength="120" aria-describedby="ajuda-nome" />
+              <small id="ajuda-nome">Como deve aparecer no certificado.</small>
+            </div>
+            <div class="campo">
+              <label for="cert-email">E-mail</label>
+              <input id="cert-email" name="email" type="email" autocomplete="email" aria-describedby="ajuda-email" />
+              <small id="ajuda-email">Use o mesmo e-mail da sua conta Google.</small>
+            </div>
+            <div class="campo">
+              <label for="cert-cpf">CPF</label>
+              <input id="cert-cpf" name="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" autocomplete="off" aria-describedby="ajuda-cpf" />
+              <small id="ajuda-cpf">Usado somente para emitir o certificado. Nesta versão do protótipo ele não é gravado.</small>
+            </div>
+            <div>
+              <button class="btn btn-escuro" type="submit" aria-disabled="true" disabled>Solicitar certificado</button>
+              <p class="apoio">Disponível quando os módulos exigidos forem concluídos.</p>
+            </div>
+          </form>
+        </section>
+
+        <section aria-labelledby="previa" style="margin-top:2.25rem">
+          <h2 id="previa" class="secao-titulo">Pré-visualização do certificado</h2>
+          <p class="apoio">Atualiza enquanto você preenche. O documento final é emitido pela instituição.</p>
+          <article class="certificado-previa" aria-label="Pré-visualização do certificado">
+            <header class="cert-cabecalho">
+              <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="40"></span>
+              <p class="cert-instituicao">Centro Universitário de Lins – UNILINS</p>
+            </header>
+            <p class="cert-titulo">Certificado de conclusão</p>
+            <p class="rotulo">Certificamos que</p>
+            <p class="cert-nome" id="previa-nome">Seu nome completo</p>
+            <p>concluiu a disciplina <strong>Mineração de Texto e Processamento de Linguagem Natural</strong>, com carga horária de <strong>[horas a definir]</strong>.</p>
+            <p class="rotulo">Código de verificação: [gerado na emissão]</p>
+            <footer class="cert-rodape">
+              <span>[Assinatura do responsável]</span>
+              <span>Lins, [data de emissão]</span>
+            </footer>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/certificado.js"></script>
+  <script src="js/sessao.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <button class="menu-botao" id="menu-toggle" type="button" aria-controls="menu-lateral" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <a class="logo-area" href="painel.html" data-manter-sessao aria-label="Painel">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Área do estudante</span></div>
+      </a>
+      <div class="acoes">
+        <a class="btn btn-secundario" href="login.html">Sair</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar" id="menu-lateral" aria-label="Menu do estudante">
+    <nav aria-label="Menu do estudante">
+    <p class="grupo">Estudo</p>
+    <ul>
+    <li><a href="painel.html" data-manter-sessao aria-current="page"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span>Painel</span></a></li>
+    <li><a href="trilha.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a4 4 0 0 0 0-8H8a4 4 0 0 1 0-8h8"/></svg></span><span>Trilha de aprendizagem</span></a></li>
+    <li><a href="programa.html"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><span>Programa</span></a></li>
+    <li><a href="classificacao.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span>Classificação</span></a></li>
+    </ul>
+    <p class="grupo">Ferramentas</p>
+    <ul>
+    <li><a href="laboratorio.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span>Laboratório de texto</span></a></li>
+    <li><a href="glossario.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Glossário</span></a></li>
+    </ul>
+    <p class="grupo">Conta</p>
+    <ul>
+    <li><a href="certificado.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></span><span>Certificado</span></a></li>
+    <li><a href="perfil.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Meu perfil</span></a></li>
+    </ul>
+    </nav></aside>
+
+    <main id="conteudo" class="conteudo-app">
+      <div class="container">
+        <p class="migalhas">Painel</p>
+        <h1 class="titulo-pagina">Bem-vindo(a), <span data-nome>Estudante</span></h1>
+        <p class="subtitulo">Sua meta diária é de <span data-meta>15 minutos</span>. Continue de onde parou.</p>
+
+        <div class="grade" style="margin-bottom:1.75rem">
+          <article class="card">
+            <p class="rotulo">Progresso geral</p>
+            <p class="valor"><span data-unidades-concluidas>0</span> de 10</p>
+            <p class="rotulo">módulos concluídos</p>
+            <div class="progresso" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Módulos concluídos" data-barra-pai style="margin-top:.6rem"><span data-barra style="width:0%"></span></div>
+          </article>
+          <article class="card">
+            <p class="rotulo">Sequência de dias</p>
+            <p class="valor"><span data-sequencia>0</span> dias</p>
+            <p class="rotulo">dias seguidos com aulas ou provas concluídas</p>
+          </article>
+          <article class="card">
+            <p class="rotulo">Pontos de experiência</p>
+            <p class="valor" data-xp>0</p>
+            <p class="rotulo">XP acumulados</p>
+          </article>
+          <article class="card">
+            <p class="rotulo">Provas</p>
+            <p class="valor" data-tentativas>0</p>
+            <p class="rotulo">tentativas registradas</p>
+          </article>
+        </div>
+
+        <section aria-labelledby="proxima">
+          <h2 id="proxima" style="font-size:1.3rem">Próxima aula recomendada</h2>
+          <article class="card" style="display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap">
+            <div>
+              <span class="selo destaque" data-proxima-modulo>Unidade 1</span>
+              <h3 style="margin-top:.5rem" data-proxima-titulo>Carregando…</h3>
+              <p data-proxima-texto></p>
+            </div>
+            <a class="btn btn-primario" href="aula.html" data-proxima-link data-manter-sessao>Continuar</a>
+          </article>
+        </section>
+
+        <section aria-labelledby="atalho" style="margin-top:2rem">
+          <h2 id="atalho" style="font-size:1.3rem">Acesso rápido</h2>
+          <div class="grade">
+            <a class="card" href="laboratorio.html" data-manter-sessao style="text-decoration:none"><h3>Laboratório de texto</h3><p>Teste as etapas de pré-processamento com seu próprio texto.</p></a>
+            <a class="card" href="glossario.html" data-manter-sessao style="text-decoration:none"><h3>Glossário</h3><p>Corpus, token, normalização e os demais termos da disciplina.</p></a>
+            <a class="card" href="trilha.html" data-manter-sessao style="text-decoration:none"><h3>Trilha de aprendizagem</h3><p>Veja a ordem dos módulos e o que está disponível.</p></a>
+          </div>
+        </section>
+
+        <section aria-labelledby="resultados" style="margin-top:2rem">
+          <h2 id="resultados" style="font-size:1.3rem">Resultados dos questionários</h2>
+          <div class="vazio">Nenhum questionário respondido ainda. Os resultados aparecem aqui depois da primeira tentativa.</div>
+        </section>
+
+        <section aria-labelledby="historico" style="margin-top:2rem">
+          <h2 id="historico" style="font-size:1.3rem">Histórico de aprendizagem</h2>
+          <div class="vazio">Sua atividade aparecerá aqui conforme você estudar.</div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/progresso.js"></script>
+  <script src="js/painel.js"></script>
+  <script src="js/sessao.js"></script>
+</body>
+</html>

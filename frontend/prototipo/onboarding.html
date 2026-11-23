@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Primeiros passos · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <a class="logo-area" href="index.html" aria-label="Início">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="bloco">
+      <div class="container" style="max-width:620px">
+        <p class="eyebrow">Passo 1 de 2</p>
+        <h1 class="titulo-pagina">Vamos preparar sua trilha</h1>
+        <p class="subtitulo">Duas perguntas rápidas para personalizar seu painel. Você pode alterar tudo depois no perfil.</p>
+
+        <form class="formulario" action="painel.html" method="get">
+          <div class="campo">
+            <label for="nome">Como você quer ser chamado(a)?</label>
+            <input id="nome" name="nome" type="text" required maxlength="60" autocomplete="given-name" />
+            <small>Usado na mensagem de boas-vindas.</small>
+          </div>
+
+          <div class="campo">
+            <label for="meta">Quanto tempo por dia você pretende estudar?</label>
+            <select id="meta" name="meta">
+              <option value="10">10 minutos</option>
+              <option value="15" selected>15 minutos</option>
+              <option value="30">30 minutos</option>
+            </select>
+            <small>A meta aparece no painel. Não há cobrança nem penalidade pelo tempo.</small>
+          </div>
+
+          <div>
+            <button class="btn btn-primario" type="submit">Ir para o painel</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="rodape-base">Protótipo de interface · Respostas de exemplo, sem armazenamento.</p>
+    </div>
+  </footer>
+
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+</body>
+</html>

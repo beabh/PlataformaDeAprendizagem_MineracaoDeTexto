@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trilha de aprendizagem · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <button class="menu-botao" id="menu-toggle" type="button" aria-controls="menu-lateral" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <a class="logo-area" href="painel.html" data-manter-sessao aria-label="Painel">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Área do estudante</span></div>
+      </a>
+      <div class="acoes">
+        <a class="btn btn-secundario" href="login.html">Sair</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar" id="menu-lateral" aria-label="Menu do estudante">
+    <nav aria-label="Menu do estudante">
+    <p class="grupo">Estudo</p>
+    <ul>
+    <li><a href="painel.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span>Painel</span></a></li>
+    <li><a href="trilha.html" data-manter-sessao aria-current="page"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a4 4 0 0 0 0-8H8a4 4 0 0 1 0-8h8"/></svg></span><span>Trilha de aprendizagem</span></a></li>
+    <li><a href="programa.html"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><span>Programa</span></a></li>
+    <li><a href="classificacao.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span>Classificação</span></a></li>
+    </ul>
+    <p class="grupo">Ferramentas</p>
+    <ul>
+    <li><a href="laboratorio.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span>Laboratório de texto</span></a></li>
+    <li><a href="glossario.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Glossário</span></a></li>
+    </ul>
+    <p class="grupo">Conta</p>
+    <ul>
+    <li><a href="certificado.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></span><span>Certificado</span></a></li>
+    <li><a href="perfil.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Meu perfil</span></a></li>
+    </ul>
+    </nav></aside>
+
+    <main id="conteudo" class="conteudo-app">
+      <div class="container">
+        <p class="migalhas">Trilha</p>
+        <h1 class="titulo-pagina">Trilha de aprendizagem</h1>
+        <p class="subtitulo">Siga o caminho de uma aula para a outra. Cada aula conclui com um toque. A prova de cada unidade libera quando todas as aulas estiverem concluídas.</p>
+
+        <div class="aviso-protótipo">
+          Nesta versão, só a aula 1.1 tem conteúdo escrito. As demais aulas mostram a ordem da trilha e podem ser simuladas para testar o bloqueio.
+        </div>
+
+        <p id="aviso-acao" class="mensagem erro" role="status" hidden></p>
+
+        <section class="pontuacao-trilha" aria-labelledby="titulo-pontuacao">
+          <div class="placar-topo">
+            <h2 id="titulo-pontuacao">Seus pontos</h2>
+            <a class="btn btn-secundario" href="classificacao.html" data-manter-sessao>Ver classificação completa</a>
+          </div>
+          <dl class="placar-numeros">
+            <div class="placar-item ganho"><dt>Ganhos</dt><dd data-pontos-ganhos aria-live="polite">0</dd></div>
+            <div class="placar-item perda"><dt>Perdidos</dt><dd data-pontos-perdas aria-live="polite">0</dd></div>
+            <div class="placar-item total"><dt>Pontuação total</dt><dd data-pontos-total aria-live="polite">0</dd></div>
+          </dl>
+          <p class="apoio">Pontuação total = ganhos − perdidos. Sua posição: <strong data-posicao>aparece quando a turma estiver cadastrada</strong>.</p>
+        </section>
+
+        <div class="duo-resumo" aria-label="Resumo do progresso">
+          <span class="duo-chip">Sequência: <span data-sequencia>0</span> dias</span>
+          <span class="duo-chip">Aulas concluídas: <span data-aulas-concluidas>0</span></span>
+          <span class="duo-chip">Unidades concluídas: <span data-unidades-concluidas>0</span> de 10</span>
+        </div>
+
+        <div class="legenda-trilha" aria-label="Legenda">
+          <span><span class="ponto concluido-p"></span> concluída</span>
+          <span><span class="ponto atual-p"></span> disponível agora</span>
+          <span><span class="ponto bloqueado-p"></span> bloqueada</span>
+        </div>
+
+        <section class="unidade" data-unidade="P" aria-labelledby="u-P">
+          <header class="unidade-cab">
+            <p class="rotulo">Preparação</p>
+            <h2 id="u-P">Python aplicado a texto</h2>
+            <p class="unidade-pontos" data-unidade-pontos="P">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="P.1" href="aula.html?aula=P.1" data-manter-sessao aria-label="Aula P.1: Strings e textos da pandemia"><span class="codigo">P.1</span></a>
+              <span class="no-rotulo">Strings e textos da pandemia</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="P.2" href="aula.html?aula=P.2" data-manter-sessao aria-label="Aula P.2: Listas e dicionários para tokens"><span class="codigo">P.2</span></a>
+              <span class="no-rotulo">Listas e dicionários para tokens</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="P.3" href="aula.html?aula=P.3" data-manter-sessao aria-label="Aula P.3: Contando palavras com Counter"><span class="codigo">P.3</span></a>
+              <span class="no-rotulo">Contando palavras com Counter</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="P.4" href="aula.html?aula=P.4" data-manter-sessao aria-label="Aula P.4: Lendo TXT e CSV do corpus, com validação"><span class="codigo">P.4</span></a>
+              <span class="no-rotulo">Lendo TXT e CSV do corpus, com validação</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="1" aria-labelledby="u-1">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 1</p>
+            <h2 id="u-1">Introdução à mineração de texto</h2>
+            <p class="unidade-pontos" data-unidade-pontos="1">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="1.1" href="aula.html?aula=1.1" data-manter-sessao aria-label="Aula 1.1: Dados estruturados, não estruturados e mineração de texto"><span class="codigo">1.1</span></a>
+              <span class="no-rotulo">Dados estruturados, não estruturados e mineração de texto</span>
+            </li>
+            <li class="dir">
+              <a class="no prova" data-prova="1" href="prova.html?modulo=1" data-manter-sessao aria-label="Prova do módulo 1"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="2" aria-labelledby="u-2">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 2</p>
+            <h2 id="u-2">Fundamentos de linguagem natural</h2>
+            <p class="unidade-pontos" data-unidade-pontos="2">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="2.1" href="aula.html?aula=2.1" data-manter-sessao aria-label="Aula 2.1: O que é PLN e por que a linguagem é ambígua"><span class="codigo">2.1</span></a>
+              <span class="no-rotulo">O que é PLN e por que a linguagem é ambígua</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="2.2" href="aula.html?aula=2.2" data-manter-sessao aria-label="Aula 2.2: Corpus e tokens: a unidade básica da análise"><span class="codigo">2.2</span></a>
+              <span class="no-rotulo">Corpus e tokens: a unidade básica da análise</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="2.3" href="aula.html?aula=2.3" data-manter-sessao aria-label="Aula 2.3: Normalização do texto"><span class="codigo">2.3</span></a>
+              <span class="no-rotulo">Normalização do texto</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="2.4" href="aula.html?aula=2.4" data-manter-sessao aria-label="Aula 2.4: Stopwords: o que remover e o que manter"><span class="codigo">2.4</span></a>
+              <span class="no-rotulo">Stopwords: o que remover e o que manter</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="2.5" href="aula.html?aula=2.5" data-manter-sessao aria-label="Aula 2.5: Stemming e lematização"><span class="codigo">2.5</span></a>
+              <span class="no-rotulo">Stemming e lematização</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="2.6" href="aula.html?aula=2.6" data-manter-sessao aria-label="Aula 2.6: Desafios do português brasileiro"><span class="codigo">2.6</span></a>
+              <span class="no-rotulo">Desafios do português brasileiro</span>
+            </li>
+            <li class="esq">
+              <a class="no prova" data-prova="2" href="prova.html?modulo=2" data-manter-sessao aria-label="Prova do módulo 2"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="3" aria-labelledby="u-3">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 3</p>
+            <h2 id="u-3">Preparação e limpeza de dados textuais</h2>
+            <p class="unidade-pontos" data-unidade-pontos="3">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="3.1" href="aula.html?aula=3.1" data-manter-sessao aria-label="Aula 3.1: Coleta e preparação do corpus"><span class="codigo">3.1</span></a>
+              <span class="no-rotulo">Coleta e preparação do corpus</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="3.2" href="aula.html?aula=3.2" data-manter-sessao aria-label="Aula 3.2: Remoção de ruídos, pontuação e caracteres"><span class="codigo">3.2</span></a>
+              <span class="no-rotulo">Remoção de ruídos, pontuação e caracteres</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="3.3" href="aula.html?aula=3.3" data-manter-sessao aria-label="Aula 3.3: Duplicatas e dados ausentes"><span class="codigo">3.3</span></a>
+              <span class="no-rotulo">Duplicatas e dados ausentes</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="3.4" href="aula.html?aula=3.4" data-manter-sessao aria-label="Aula 3.4: Padronização e metadados: fonte, período e licença"><span class="codigo">3.4</span></a>
+              <span class="no-rotulo">Padronização e metadados: fonte, período e licença</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="3.5" href="aula.html?aula=3.5" data-manter-sessao aria-label="Aula 3.5: Considerações éticas e de privacidade"><span class="codigo">3.5</span></a>
+              <span class="no-rotulo">Considerações éticas e de privacidade</span>
+            </li>
+            <li class="dir">
+              <a class="no prova" data-prova="3" href="prova.html?modulo=3" data-manter-sessao aria-label="Prova do módulo 3"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="4" aria-labelledby="u-4">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 4</p>
+            <h2 id="u-4">Frequência e representação textual</h2>
+            <p class="unidade-pontos" data-unidade-pontos="4">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="4.1" href="aula.html?aula=4.1" data-manter-sessao aria-label="Aula 4.1: Frequência absoluta e relativa"><span class="codigo">4.1</span></a>
+              <span class="no-rotulo">Frequência absoluta e relativa</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="4.2" href="aula.html?aula=4.2" data-manter-sessao aria-label="Aula 4.2: N-gramas"><span class="codigo">4.2</span></a>
+              <span class="no-rotulo">N-gramas</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="4.3" href="aula.html?aula=4.3" data-manter-sessao aria-label="Aula 4.3: Bag of Words e vetorização"><span class="codigo">4.3</span></a>
+              <span class="no-rotulo">Bag of Words e vetorização</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="4.4" href="aula.html?aula=4.4" data-manter-sessao aria-label="Aula 4.4: TF-IDF"><span class="codigo">4.4</span></a>
+              <span class="no-rotulo">TF-IDF</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="4.5" href="aula.html?aula=4.5" data-manter-sessao aria-label="Aula 4.5: Similaridade do cosseno"><span class="codigo">4.5</span></a>
+              <span class="no-rotulo">Similaridade do cosseno</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="4.6" href="aula.html?aula=4.6" data-manter-sessao aria-label="Aula 4.6: Introdução a embeddings"><span class="codigo">4.6</span></a>
+              <span class="no-rotulo">Introdução a embeddings</span>
+            </li>
+            <li class="esq">
+              <a class="no prova" data-prova="4" href="prova.html?modulo=4" data-manter-sessao aria-label="Prova do módulo 4"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="5" aria-labelledby="u-5">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 5</p>
+            <h2 id="u-5">Análise de sentimentos</h2>
+            <p class="unidade-pontos" data-unidade-pontos="5">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="5.1" href="aula.html?aula=5.1" data-manter-sessao aria-label="Aula 5.1: Conceito e classes: positiva, negativa e neutra"><span class="codigo">5.1</span></a>
+              <span class="no-rotulo">Conceito e classes: positiva, negativa e neutra</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="5.2" href="aula.html?aula=5.2" data-manter-sessao aria-label="Aula 5.2: Abordagem por léxicos"><span class="codigo">5.2</span></a>
+              <span class="no-rotulo">Abordagem por léxicos</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="5.3" href="aula.html?aula=5.3" data-manter-sessao aria-label="Aula 5.3: Modelos supervisionados"><span class="codigo">5.3</span></a>
+              <span class="no-rotulo">Modelos supervisionados</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="5.4" href="aula.html?aula=5.4" data-manter-sessao aria-label="Aula 5.4: Limitações: ironia, negação e linguagem informal"><span class="codigo">5.4</span></a>
+              <span class="no-rotulo">Limitações: ironia, negação e linguagem informal</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="5.5" href="aula.html?aula=5.5" data-manter-sessao aria-label="Aula 5.5: Sentimento textual não é emoção humana"><span class="codigo">5.5</span></a>
+              <span class="no-rotulo">Sentimento textual não é emoção humana</span>
+            </li>
+            <li class="dir">
+              <a class="no prova" data-prova="5" href="prova.html?modulo=5" data-manter-sessao aria-label="Prova do módulo 5"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="6" aria-labelledby="u-6">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 6</p>
+            <h2 id="u-6">Classificação automática de textos</h2>
+            <p class="unidade-pontos" data-unidade-pontos="6">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="6.1" href="aula.html?aula=6.1" data-manter-sessao aria-label="Aula 6.1: Classificação supervisionada: treino e teste"><span class="codigo">6.1</span></a>
+              <span class="no-rotulo">Classificação supervisionada: treino e teste</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="6.2" href="aula.html?aula=6.2" data-manter-sessao aria-label="Aula 6.2: Naive Bayes"><span class="codigo">6.2</span></a>
+              <span class="no-rotulo">Naive Bayes</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="6.3" href="aula.html?aula=6.3" data-manter-sessao aria-label="Aula 6.3: Regressão logística"><span class="codigo">6.3</span></a>
+              <span class="no-rotulo">Regressão logística</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="6.4" href="aula.html?aula=6.4" data-manter-sessao aria-label="Aula 6.4: Matriz de confusão, precisão, recall e F1"><span class="codigo">6.4</span></a>
+              <span class="no-rotulo">Matriz de confusão, precisão, recall e F1</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="6.5" href="aula.html?aula=6.5" data-manter-sessao aria-label="Aula 6.5: Overfitting e vazamento de dados"><span class="codigo">6.5</span></a>
+              <span class="no-rotulo">Overfitting e vazamento de dados</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="6.6" href="aula.html?aula=6.6" data-manter-sessao aria-label="Aula 6.6: Introdução a Transformers"><span class="codigo">6.6</span></a>
+              <span class="no-rotulo">Introdução a Transformers</span>
+            </li>
+            <li class="esq">
+              <a class="no prova" data-prova="6" href="prova.html?modulo=6" data-manter-sessao aria-label="Prova do módulo 6"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="7" aria-labelledby="u-7">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 7</p>
+            <h2 id="u-7">Modelagem de tópicos</h2>
+            <p class="unidade-pontos" data-unidade-pontos="7">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="7.1" href="aula.html?aula=7.1" data-manter-sessao aria-label="Aula 7.1: Descoberta de assuntos em grandes coleções"><span class="codigo">7.1</span></a>
+              <span class="no-rotulo">Descoberta de assuntos em grandes coleções</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="7.2" href="aula.html?aula=7.2" data-manter-sessao aria-label="Aula 7.2: Agrupamento textual"><span class="codigo">7.2</span></a>
+              <span class="no-rotulo">Agrupamento textual</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="7.3" href="aula.html?aula=7.3" data-manter-sessao aria-label="Aula 7.3: Latent Dirichlet Allocation (LDA)"><span class="codigo">7.3</span></a>
+              <span class="no-rotulo">Latent Dirichlet Allocation (LDA)</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="7.4" href="aula.html?aula=7.4" data-manter-sessao aria-label="Aula 7.4: Interpretação e limitações dos tópicos"><span class="codigo">7.4</span></a>
+              <span class="no-rotulo">Interpretação e limitações dos tópicos</span>
+            </li>
+            <li class="esq">
+              <a class="no prova" data-prova="7" href="prova.html?modulo=7" data-manter-sessao aria-label="Prova do módulo 7"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="8" aria-labelledby="u-8">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 8</p>
+            <h2 id="u-8">Reconhecimento de entidades nomeadas</h2>
+            <p class="unidade-pontos" data-unidade-pontos="8">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="8.1" href="aula.html?aula=8.1" data-manter-sessao aria-label="Aula 8.1: NER: pessoas, organizações, locais e datas"><span class="codigo">8.1</span></a>
+              <span class="no-rotulo">NER: pessoas, organizações, locais e datas</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="8.2" href="aula.html?aula=8.2" data-manter-sessao aria-label="Aula 8.2: Modelos de identificação de entidades"><span class="codigo">8.2</span></a>
+              <span class="no-rotulo">Modelos de identificação de entidades</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="8.3" href="aula.html?aula=8.3" data-manter-sessao aria-label="Aula 8.3: Erros comuns e ambiguidades"><span class="codigo">8.3</span></a>
+              <span class="no-rotulo">Erros comuns e ambiguidades</span>
+            </li>
+            <li class="dir">
+              <a class="no prova" data-prova="8" href="prova.html?modulo=8" data-manter-sessao aria-label="Prova do módulo 8"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="9" aria-labelledby="u-9">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 9</p>
+            <h2 id="u-9">Desinformação e análise crítica</h2>
+            <p class="unidade-pontos" data-unidade-pontos="9">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="9.1" href="aula.html?aula=9.1" data-manter-sessao aria-label="Aula 9.1: Circulação de desinformação na pandemia"><span class="codigo">9.1</span></a>
+              <span class="no-rotulo">Circulação de desinformação na pandemia</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="9.2" href="aula.html?aula=9.2" data-manter-sessao aria-label="Aula 9.2: Características linguísticas de conteúdos enganosos"><span class="codigo">9.2</span></a>
+              <span class="no-rotulo">Características linguísticas de conteúdos enganosos</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="9.3" href="aula.html?aula=9.3" data-manter-sessao aria-label="Aula 9.3: Limites dos classificadores e viés de datasets"><span class="codigo">9.3</span></a>
+              <span class="no-rotulo">Limites dos classificadores e viés de datasets</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="9.4" href="aula.html?aula=9.4" data-manter-sessao aria-label="Aula 9.4: Checagem de fatos e avaliação crítica de evidências"><span class="codigo">9.4</span></a>
+              <span class="no-rotulo">Checagem de fatos e avaliação crítica de evidências</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="9.5" href="aula.html?aula=9.5" data-manter-sessao aria-label="Aula 9.5: Ética e responsabilidade em IA"><span class="codigo">9.5</span></a>
+              <span class="no-rotulo">Ética e responsabilidade em IA</span>
+            </li>
+            <li class="dir">
+              <a class="no prova" data-prova="9" href="prova.html?modulo=9" data-manter-sessao aria-label="Prova do módulo 9"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+        <section class="unidade" data-unidade="10" aria-labelledby="u-10">
+          <header class="unidade-cab">
+            <p class="rotulo">Unidade 10</p>
+            <h2 id="u-10">Projeto prático final</h2>
+            <p class="unidade-pontos" data-unidade-pontos="10">Pontos desta unidade: <span data-ganhos-unidade>0</span> ganhos · <span data-perdas-unidade>0</span> perdidos</p>
+          </header>
+          <ol class="caminho">
+            <li class="esq">
+              <a class="no" data-codigo="10.1" href="aula.html?aula=10.1" data-manter-sessao aria-label="Aula 10.1: Selecionar e inspecionar o corpus"><span class="codigo">10.1</span></a>
+              <span class="no-rotulo">Selecionar e inspecionar o corpus</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="10.2" href="aula.html?aula=10.2" data-manter-sessao aria-label="Aula 10.2: Limpeza e extração de termos"><span class="codigo">10.2</span></a>
+              <span class="no-rotulo">Limpeza e extração de termos</span>
+            </li>
+            <li class="esq">
+              <a class="no" data-codigo="10.3" href="aula.html?aula=10.3" data-manter-sessao aria-label="Aula 10.3: Análise, visualização e interpretação"><span class="codigo">10.3</span></a>
+              <span class="no-rotulo">Análise, visualização e interpretação</span>
+            </li>
+            <li class="dir">
+              <a class="no" data-codigo="10.4" href="aula.html?aula=10.4" data-manter-sessao aria-label="Aula 10.4: Limitações e possíveis vieses"><span class="codigo">10.4</span></a>
+              <span class="no-rotulo">Limitações e possíveis vieses</span>
+            </li>
+            <li class="esq">
+              <a class="no prova" data-prova="10" href="prova.html?modulo=10" data-manter-sessao aria-label="Prova do módulo 10"><span class="codigo">P</span></a>
+              <span class="no-rotulo">Prova da unidade</span>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/progresso.js"></script>
+  <script src="js/trilha.js"></script>
+  <script src="js/sessao.js"></script>
+</body>
+</html>

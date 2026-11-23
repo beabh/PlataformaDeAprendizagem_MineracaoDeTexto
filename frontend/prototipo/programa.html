@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="claro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programa · Mineração de Texto e PLN (protótipo)</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container">
+      <button class="menu-botao" id="menu-toggle" type="button" aria-controls="menu-lateral" aria-expanded="false" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <a class="logo-area" href="painel.html" data-manter-sessao aria-label="Painel">
+        <span class="logo-chip"><img class="logo-unilins" src="img/logo-unilins.png" alt="UNILINS" height="34"></span>
+        <div class="logo-texto"><strong>Mineração de Texto e PLN</strong><span>Estudo de caso: COVID-19</span></div>
+      </a>
+      <nav class="principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="programa.html" aria-current="page">Programa</a></li>
+          <li><a href="sobre.html">Sobre o projeto</a></li>
+          <li><a href="laboratorio.html">Laboratório</a></li>
+        </ul>
+      </nav>
+      <div class="acoes"><a class="btn btn-primario" href="login.html">Entrar</a></div>
+    </div>
+  </header>
+
+  <div class="app">
+    <aside class="sidebar" id="menu-lateral" aria-label="Menu do estudante">
+    <nav aria-label="Menu do estudante">
+    <p class="grupo">Estudo</p>
+    <ul>
+    <li><a href="painel.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></span><span>Painel</span></a></li>
+    <li><a href="trilha.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a4 4 0 0 0 0-8H8a4 4 0 0 1 0-8h8"/></svg></span><span>Trilha de aprendizagem</span></a></li>
+    <li><a href="programa.html" aria-current="page"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><span>Programa</span></a></li>
+    <li><a href="classificacao.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span>Classificação</span></a></li>
+    </ul>
+    <p class="grupo">Ferramentas</p>
+    <ul>
+    <li><a href="laboratorio.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6"/><path d="M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/><path d="M7.5 15h9"/></svg></span><span>Laboratório de texto</span></a></li>
+    <li><a href="glossario.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Glossário</span></a></li>
+    </ul>
+    <p class="grupo">Conta</p>
+    <ul>
+    <li><a href="certificado.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg></span><span>Certificado</span></a></li>
+    <li><a href="perfil.html" data-manter-sessao><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span>Meu perfil</span></a></li>
+    </ul>
+    </nav></aside>
+
+    <main id="conteudo" class="conteudo-app">
+    <section class="bloco">
+      <div class="container">
+        <p class="migalhas"><a href="index.html">Início</a> / Programa</p>
+        <h1 class="titulo-pagina">Programa da disciplina</h1>
+        <p class="subtitulo">As aulas são liberadas em sequência. A prova de cada módulo libera quando todas as aulas do módulo forem concluídas, e o módulo seguinte libera quando a prova for aprovada.</p>
+
+        <div class="aviso-protótipo">
+          Rascunho para revisão com a docente. Carga horária, critérios de avaliação e bibliografia ainda não foram definidos. O mínimo de aprovação nas provas (7 de 10) é um valor padrão a confirmar.
+        </div>
+
+        <p id="aviso-acao" class="mensagem erro" role="status" hidden></p>
+
+        <div class="tabela-wrap">
+          <table class="tabela">
+            <caption class="sr-only">Módulos do programa, com aulas, prova e situação</caption>
+            <thead>
+              <tr><th scope="col">Módulo</th><th scope="col">Tema</th><th scope="col">Principais tópicos</th><th scope="col">Aulas</th><th scope="col">Prova</th><th scope="col">Situação</th><th scope="col">Ação</th></tr>
+            </thead>
+            <tbody>
+              <tr data-modulo="P">
+                <th scope="row">Preparação</th>
+                <td><a href="trilha.html#u-P" class="link-modulo" data-link-modulo="P">Preparação com Python aplicado a textos da pandemia</a></td>
+                <td>Strings, listas, dicionários, Counter e leitura de TXT e CSV</td>
+                <td data-aulas>0/4</td>
+                <td data-prova>—</td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="1">
+                <th scope="row">1</th>
+                <td><a href="trilha.html#u-1" class="link-modulo" data-link-modulo="1">Introdução à mineração de texto</a></td>
+                <td>Dados estruturados e não estruturados, etapas do processo e relação com PLN</td>
+                <td data-aulas>0/1</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="2">
+                <th scope="row">2</th>
+                <td><a href="trilha.html#u-2" class="link-modulo" data-link-modulo="2">Fundamentos de linguagem natural</a></td>
+                <td>PLN, corpus, tokens, normalização, stopwords, stemming, lematização e desafios do português</td>
+                <td data-aulas>0/6</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="3">
+                <th scope="row">3</th>
+                <td><a href="trilha.html#u-3" class="link-modulo" data-link-modulo="3">Preparação e limpeza de dados textuais</a></td>
+                <td>Corpus, ruídos, duplicatas, padronização e considerações éticas</td>
+                <td data-aulas>0/5</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="4">
+                <th scope="row">4</th>
+                <td><a href="trilha.html#u-4" class="link-modulo" data-link-modulo="4">Frequência e representação textual</a></td>
+                <td>Frequência, n-gramas, Bag of Words, TF-IDF, cosseno e embeddings</td>
+                <td data-aulas>0/6</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="5">
+                <th scope="row">5</th>
+                <td><a href="trilha.html#u-5" class="link-modulo" data-link-modulo="5">Análise de sentimentos</a></td>
+                <td>Léxicos, modelos supervisionados e limitações com ironia e negação</td>
+                <td data-aulas>0/5</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="6">
+                <th scope="row">6</th>
+                <td><a href="trilha.html#u-6" class="link-modulo" data-link-modulo="6">Classificação automática de textos</a></td>
+                <td>Treino e teste, Naive Bayes, regressão logística, métricas e Transformers</td>
+                <td data-aulas>0/6</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="7">
+                <th scope="row">7</th>
+                <td><a href="trilha.html#u-7" class="link-modulo" data-link-modulo="7">Modelagem de tópicos</a></td>
+                <td>Descoberta de assuntos, agrupamento, LDA e interpretação</td>
+                <td data-aulas>0/4</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="8">
+                <th scope="row">8</th>
+                <td><a href="trilha.html#u-8" class="link-modulo" data-link-modulo="8">Reconhecimento de entidades nomeadas</a></td>
+                <td>Pessoas, organizações, locais e datas, com erros comuns</td>
+                <td data-aulas>0/3</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="9">
+                <th scope="row">9</th>
+                <td><a href="trilha.html#u-9" class="link-modulo" data-link-modulo="9">Desinformação e análise crítica</a></td>
+                <td>Limites dos classificadores, viés de datasets e checagem de fatos</td>
+                <td data-aulas>0/5</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+              <tr data-modulo="10">
+                <th scope="row">10</th>
+                <td><a href="trilha.html#u-10" class="link-modulo" data-link-modulo="10">Projeto prático final</a></td>
+                <td>Análise textual completa, da seleção dos textos à interpretação</td>
+                <td data-aulas>0/4</td>
+                <td data-prova></td>
+                <td data-status></td>
+                <td data-acao></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="subtitulo" style="font-size:.9rem; margin-top:.8rem">Clique no tema para abrir o módulo na trilha. Módulos bloqueados não podem ser abertos ainda.</p>
+
+        <div style="margin-top:1.5rem; display:flex; gap:.6rem; flex-wrap:wrap; align-items:center">
+          <button class="btn-fantasma" type="button" data-zerar>Zerar progresso deste protótipo</button>
+          <button class="btn-fantasma" type="button" data-cancelar-zerar hidden>Cancelar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="rodape-base">Protótipo de interface · Programa em rascunho.</p>
+    </div>
+  </footer>
+
+  <div class="gaveta-fundo" id="gaveta-fundo" hidden></div>
+  <p id="mensagem-global" role="status" class="sr-only"></p>
+  <script src="js/comum.js"></script>
+  <script src="js/progresso.js"></script>
+  <script src="js/estados.js"></script>
+  <script src="js/programa.js"></script>
+</body>
+</html>
