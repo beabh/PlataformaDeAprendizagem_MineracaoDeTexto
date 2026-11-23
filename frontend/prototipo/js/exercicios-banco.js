@@ -55,6 +55,307 @@
         correta: 0,
         explicacao: 'split() separa o texto em partes, por espaço por padrão, e devolve uma lista de tokens.'
       }
+    ],
+
+    /* Módulo 2 · Fundamentos de linguagem natural. Frases do PDF "Informações Oficiais sobre COVID-19". */
+    '2.1': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Na expressão "caso confirmado", a palavra "caso" pode indicar um registro no sistema ou uma pessoa infectada. Essa dupla leitura é um exemplo de:',
+        opcoes: ['Ambiguidade', 'Stopword', 'Lematização'],
+        correta: 0,
+        explicacao: 'Quando uma palavra admite mais de um sentido, o programa precisa de contexto para escolher. Por isso o PLN é difícil.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'O que é PLN (Processamento de Linguagem Natural)?',
+        opcoes: ['Área que permite a computadores tratar textos escritos em linguagem humana', 'Tipo de planilha para guardar notícias', 'Sistema oficial de notificação de casos'],
+        correta: 0,
+        explicacao: 'PLN reúne métodos para que computadores analisem e processem a linguagem humana, como textos de notícias e boletins.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'O material diz que os boletins em PDF do Ministério da Saúde e os textos da Prefeitura de Lins formam um corpus textual oficial. Cada boletim, nesse caso, é um:',
+        opcoes: ['Documento do corpus', 'Token', 'Stopword'],
+        correta: 0,
+        explicacao: 'Cada texto individual é um documento. O conjunto de documentos é o corpus.'
+      }
+    ],
+    '2.2': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Quantos tokens tem a frase "O primeiro caso confirmado de COVID-19 no Brasil foi registrado em 26 de fevereiro de 2020, em São Paulo (homem que havia viajado à Itália)." quando a separação é feita só por espaços em branco?',
+        opcoes: ['22', '25', '26'],
+        correta: 1,
+        explicacao: 'Separando por espaços, "COVID-19" fica como um token só, e "2020," e "(homem" mantêm a pontuação colada. São 25 tokens.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Na mesma frase, se a regra separar apenas letras e números, "COVID-19" vira "COVID" e "19". Quantos tokens a frase passa a ter?',
+        opcoes: ['25', '26', '23'],
+        correta: 1,
+        explicacao: 'O hífen e os parênteses deixam de fazer parte dos tokens, e "COVID-19" vira dois tokens. O total sobe para 26. A regra de separação muda o resultado, por isso ela precisa ser documentada.'
+      },
+      {
+        tipo: 'digitar',
+        enunciado: 'Quantos tokens tem a frase "A primeira morte por COVID-19 no Brasil foi registrada em 12 de março de 2020 (mulher de 57 anos em São Paulo)." separando por espaços? Digite só o número.',
+        respostas: ['22'],
+        explicacao: 'Pela regra de espaços, a frase tem 22 tokens.'
+      }
+    ],
+    '2.3': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Aplicando minúsculas e remoção de acentos, "São Paulo" vira:',
+        opcoes: ['sao paulo', 'São Paulo', 'SÃO PAULO'],
+        correta: 0,
+        explicacao: 'Normalizar costuma envolver minúsculas e remoção de acentos. Assim "São" e "sao" passam a ser a mesma forma.'
+      },
+      {
+        tipo: 'digitar',
+        enunciado: 'Aplique minúsculas e remova os acentos de "Itália". Digite o resultado.',
+        respostas: ['italia'],
+        explicacao: 'Em minúsculas e sem acento, "Itália" vira "italia".'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Qual é o efeito de normalizar "COVID-19" e "covid-19" antes de contar palavras?',
+        opcoes: ['As duas formas viram uma só e são contadas juntas', 'Uma delas desaparece do texto', 'O número 19 é apagado'],
+        correta: 0,
+        explicacao: 'Depois da normalização, as duas grafias são a mesma forma, e a contagem fica correta.'
+      }
+    ],
+    '2.4': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Na frase "O primeiro caso confirmado de COVID-19 no Brasil", quais palavras são stopwords típicas?',
+        opcoes: ['O, de, no', 'primeiro, caso, Brasil', 'COVID, 19, Brasil'],
+        correta: 0,
+        explicacao: 'Stopwords são palavras funcionais, como artigos e preposições, que aparecem muito e pouco dizem sobre o tema.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Em uma análise sobre a pandemia, palavras como "caso", "morte" e "óbitos" devem ser removidas como stopwords?',
+        opcoes: ['Não, porque carregam o sentido do tema', 'Sim, porque são stopwords', 'Sim, porque são números'],
+        correta: 0,
+        explicacao: 'Termos do tema precisam ser mantidos. Remover palavras por engano apaga justamente a informação que a análise quer estudar.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Em uma lista de stopwords em português, qual destas palavras aparece?',
+        opcoes: ['de', 'Brasil', 'morte'],
+        correta: 0,
+        explicacao: '"de" é uma preposição, por isso costuma estar nas listas de stopwords. "Brasil" e "morte" carregam sentido.'
+      }
+    ],
+    '2.5': [
+      {
+        tipo: 'escolha',
+        enunciado: 'A lematização reduz "casos" à forma de dicionário, que é:',
+        opcoes: ['caso', 'cas', 'casar'],
+        correta: 0,
+        explicacao: 'O lema é a forma de dicionário do substantivo. O stemming, ao contrário, corta o final por regras e pode gerar um radical como "cas", que não é palavra.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Qual frase descreve melhor o stemming?',
+        opcoes: ['Corta sufixos por regras e pode gerar radicais que não são palavras', 'Consulta um dicionário para achar o lema correto', 'Remove todas as stopwords do texto'],
+        correta: 0,
+        explicacao: 'O stemming é rápido porque aplica regras de corte. Por isso o resultado nem sempre é uma palavra real.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Para agrupar "registrado", "registrada" e "registraram" como um mesmo sentido, qual é a melhor opção?',
+        opcoes: ['Guardar como três palavras diferentes', 'Reduzir ao mesmo lema, "registrar"', 'Trocar por números'],
+        correta: 1,
+        explicacao: 'A lematização reduz as formas flexionadas ao lema "registrar", e a contagem do conceito fica unificada.'
+      }
+    ],
+    '2.6': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Sem normalização, o que o computador enxerga em "São Paulo" e "Sao Paulo"?',
+        opcoes: ['Duas formas diferentes', 'Uma só forma', 'Um erro de sintaxe'],
+        correta: 0,
+        explicacao: 'Para o computador, a letra "ã" e a letra "a" são caracteres diferentes. Esse é um desafio comum do português.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Qual desafio é específico do português, e não aparece da mesma forma em textos em inglês?',
+        opcoes: ['Acentuação e concordância de gênero e número', 'Uso de letras maiúsculas', 'Presença de números'],
+        correta: 0,
+        explicacao: 'Acentos e flexões de gênero e número (caso, casos, confirmado, confirmada) aumentam o vocabulário do português.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Tratar "casos" e "caso" como formas diferentes causa qual problema?',
+        opcoes: ['Aumenta o vocabulário sem necessidade e divide a contagem', 'Apaga o número de casos', 'Impede a leitura do arquivo'],
+        correta: 0,
+        explicacao: 'A mesma ideia fica espalhada em duas entradas. Por isso a normalização ou a lematização costuma vir antes da contagem.'
+      }
+    ],
+
+    /* Módulo 3 · Preparação e limpeza. Usa o inventário de 50 matérias (datasets/covid_lins/inventario_materias.csv). */
+    '3.1': [
+      {
+        tipo: 'escolha',
+        enunciado: 'O arquivo inventario_materias.csv contém o texto completo das matérias?',
+        opcoes: ['Não, contém metadados como fonte, data e URL', 'Sim, o texto completo das 50 matérias', 'Sim, apenas as stopwords'],
+        correta: 0,
+        explicacao: 'O inventário descreve cada matéria. O texto completo está no documento "50 Matérias Únicas", e por isso a coleta precisa das duas fontes.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Quantas matérias do inventário são da Fase 4 (final de 2020)?',
+        opcoes: ['5', '10', '50'],
+        correta: 0,
+        explicacao: 'A coluna "fase" mostra 5 matérias na Fase 4. As outras fases têm 10 ou 5 matérias cada.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Quantas matérias do inventário são classificadas como documento oficial da Prefeitura de Lins?',
+        opcoes: ['5', '10', '39'],
+        correta: 1,
+        explicacao: 'A coluna "tipo_documento" marca 10 documentos oficiais. Os outros 39 são jornalísticos e 1 é checagem de fatos.'
+      }
+    ],
+    '3.2': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Na frase "(homem que havia viajado à Itália).", quais são os ruídos que costumam sair antes da análise de palavras?',
+        opcoes: ['Parênteses e o ponto final', 'As palavras "homem" e "Itália"', 'Os números'],
+        correta: 0,
+        explicacao: 'Parênteses e pontuação não carregam sentido para a contagem de palavras. Palavras e números úteis devem ser mantidos.'
+      },
+      {
+        tipo: 'digitar',
+        enunciado: 'Remova a vírgula de "Brasil," e digite a palavra resultante, em minúsculas.',
+        respostas: ['brasil'],
+        explicacao: 'A pontuação colada à palavra é ruído. Sem ela, a forma é "brasil".'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Dependendo da regra, "COVID-19" pode virar "COVID 19" ou "covid19". Qual problema isso cria?',
+        opcoes: ['O resultado muda conforme a regra, por isso ela precisa ser documentada', 'A palavra COVID deixa de existir', 'Não há efeito algum'],
+        correta: 0,
+        explicacao: 'Duas regras de limpeza podem gerar contagens diferentes. Registrar a regra usada é o que torna a análise reproduzível.'
+      }
+    ],
+    '3.3': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Ao checar o inventário, quantas URLs aparecem repetidas?',
+        opcoes: ['Nenhuma', '1', '5'],
+        correta: 0,
+        explicacao: 'Cada uma das 50 linhas tem uma URL diferente, então não há duplicata pela URL.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Duas linhas de um corpus têm exatamente o mesmo texto. O que fazer antes de contar palavras?',
+        opcoes: ['Manter uma e remover a cópia, para não contar duas vezes', 'Contar as duas, para aumentar a amostra', 'Trocar o texto por números'],
+        correta: 0,
+        explicacao: 'Textos duplicados inflam as frequências. Por isso a remoção de duplicatas vem antes da contagem.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Na coluna "palavras_aprox" do inventário, nenhum valor está vazio. Qual é a menor contagem registrada?',
+        opcoes: ['86', '487', '3801'],
+        correta: 0,
+        explicacao: 'A menor é 86 palavras. A maior é 3801, e a média fica em torno de 487. Valores ausentes teriam de ser tratados antes da análise.'
+      }
+    ],
+    '3.4': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Qual é o domínio com mais matérias no inventário?',
+        opcoes: ['g1.globo.com', 'www.lins.sp.gov.br', 'sampi.net.br'],
+        correta: 0,
+        explicacao: 'O domínio g1.globo.com aparece em 18 matérias. A Prefeitura de Lins tem 10.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Quantas matérias têm a data registrada apenas com o ano?',
+        opcoes: ['7', '10', '43'],
+        correta: 0,
+        explicacao: 'Sete matérias têm precisão "somente ano". As outras 43 têm dia, mês e ano.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Por que registrar fonte, período e idioma junto de cada texto é importante?',
+        opcoes: ['Para conferir a origem e comparar corpus com clareza', 'Para aumentar o número de palavras', 'Para dispensar a leitura do texto'],
+        correta: 0,
+        explicacao: 'Os metadados permitem saber de onde vem cada texto, quando foi publicado e em que língua, o que é essencial para a análise crítica.'
+      }
+    ],
+    '3.5': [
+      {
+        tipo: 'escolha',
+        enunciado: 'O PDF oficial informa que os dados de COVID-19 são revisados depois de publicados. Por que isso importa para uma análise de série temporal?',
+        opcoes: ['Um número de um período pode mudar depois, então é preciso registrar a data da coleta', 'Os números nunca mudam', 'Nenhuma análise é afetada'],
+        correta: 0,
+        explicacao: 'Revisões retrospectivas alteram casos e datas. Registrar quando o dado foi coletado permite reproduzir a análise.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'O total acumulado de casos no Brasil (cerca de 38 a 39 milhões) não equivale ao número de pessoas infectadas. Por quê?',
+        opcoes: ['Uma mesma pessoa pode ter tido mais de uma infecção', 'Os casos são inventados', 'O total inclui só as mortes'],
+        correta: 0,
+        explicacao: 'Cada caso registrado é uma notificação. Uma pessoa pode ser contada mais de uma vez, então o texto oficial pede cuidado na interpretação.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Um corpus de notícias traz nomes de pessoas. Qual cuidado de privacidade é adequado?',
+        opcoes: ['Anonimizar dados pessoais quando não forem necessários à análise', 'Publicar CPFs junto ao texto', 'Ignorar a origem do dado'],
+        correta: 0,
+        explicacao: 'A análise de texto deve proteger os dados pessoais das pessoas citadas. Anonimizar é uma prática comum.'
+      }
+    ],
+
+    /* Módulo 4 · Frequência e representação textual. Usa a frase do PDF sobre o primeiro caso no Brasil. */
+    '4.1': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Na frase "O primeiro caso confirmado de COVID-19 no Brasil foi registrado em 26 de fevereiro de 2020, em São Paulo (homem que havia viajado à Itália).", quantas vezes aparece "de", pela regra de letras e números e sem acentos? E qual é a frequência relativa, com 26 tokens?',
+        opcoes: ['3 vezes; 11,5%', '2 vezes; 7,7%', '3 vezes; 3,8%'],
+        correta: 0,
+        explicacao: 'A palavra "de" aparece em "de COVID", "de fevereiro" e "de 2020", ou seja, 3 vezes. A frequência relativa é 3 dividido por 26, o que dá cerca de 11,5%.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Na mesma frase, a frequência absoluta de "Brasil" é 1. Qual é a frequência relativa, com 26 tokens?',
+        opcoes: ['Cerca de 3,8%', '4%', '26%'],
+        correta: 0,
+        explicacao: 'A frequência relativa é a absoluta dividida pelo total de tokens. Então, 1 dividido por 26 dá cerca de 3,8%.'
+      },
+      {
+        tipo: 'digitar',
+        enunciado: 'Qual é a frequência relativa de "de" na mesma frase, em porcentagem com uma casa decimal? Digite só o número.',
+        respostas: ['11.5', '11,5'],
+        explicacao: 'Três ocorrências em 26 tokens dão 11,5%.'
+      }
+    ],
+    '4.2': [
+      {
+        tipo: 'escolha',
+        enunciado: 'Na frase "O primeiro caso confirmado...", normalizada e separada em tokens, quais são os dois primeiros bigramas (pares de palavras consecutivas)?',
+        opcoes: ['"o primeiro" e "primeiro caso"', '"o", "primeiro" e "caso"', '"caso confirmado de covid"'],
+        correta: 0,
+        explicacao: 'Um bigrama é um par de tokens seguidos. Assim, "o primeiro" e "primeiro caso" são os dois primeiros. A última opção é uma sequência de quatro palavras.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Quantos bigramas tem a frase de 26 tokens da questão anterior?',
+        opcoes: ['25', '26', '52'],
+        correta: 0,
+        explicacao: 'Em uma frase com n tokens há n menos 1 bigramas. Com 26 tokens, são 25 bigramas.'
+      },
+      {
+        tipo: 'escolha',
+        enunciado: 'Por que bigramas ajudam a identificar expressões como "sao paulo" ou "caso confirmado"?',
+        opcoes: ['Porque capturam combinações de palavras que juntas têm sentido', 'Porque apagam as stopwords', 'Porque transformam o texto em números'],
+        correta: 0,
+        explicacao: 'Uma palavra isolada pode perder o sentido que ganha ao lado de outra. Bigramas preservam essa ordem.'
+      }
     ]
   };
 })();
