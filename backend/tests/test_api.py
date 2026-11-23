@@ -32,6 +32,8 @@ def test_trilha_inicial_libera_so_o_primeiro_passo(app):
     aulas = {a["codigo"]: a["estado"] for m in trilha["modulos"] for a in m["aulas"]}
     assert aulas["P.1"] == "atual" and aulas["P.2"] == "bloqueada"
     assert trilha["pontos"] == {"ganhos": 0, "perdas": 0, "total": 0}
+    assert trilha["proxima_aula"]["codigo"] == "P.1"
+    assert [m["liberado"] for m in trilha["modulos"]][:3] == [True, True, False]
 
 
 def test_gabarito_nunca_vai_para_o_navegador(app):
@@ -78,6 +80,12 @@ def test_fluxo_de_exercicios_pontos_e_conclusao(app):
     placar = c.get("/api/aulas/1.1/placar").json()
     assert placar["ganhos"] == 10 + 5 + 10 and placar["perdas"] == 0 and placar["resolvidos"] == 4
 
+    # Ao reabrir a aula, cada exercício mostra o que valeu
+    aula = c.get("/api/aulas/1.1").json()
+    assert [e["ganho"] for e in aula["exercicios"]] == [10, 5, 0, 10]
+    assert aula["anterior"] == "P.4" and aula["proxima"] == "2.1" and aula["prova_liberada"] is True
+    assert aula["valores"] == {"acerto_primeira": 10, "acerto_segunda": 5, "pular": 2, "concluir": 10}
+
 
 def test_pulo_custa_dois_pontos_e_respeita_o_saldo(app):
     c = novo_cliente(app, "pular@teste.dev")
@@ -90,6 +98,8 @@ def test_pulo_custa_dois_pontos_e_respeita_o_saldo(app):
     assert post(c, f"/api/exercicios/{ex[2]}/tentativas", {"resposta": "VACINA"}).json()["saldo"] == 10
     r = post(c, f"/api/exercicios/{ex[3]}/pulo").json()
     assert r["perda"] == 2 and r["saldo"] == 8
+    aula = c.get("/api/aulas/P.1").json()
+    assert [(e["ganho"], e["perda"]) for e in aula["exercicios"]] == [(0, 0), (10, 0), (0, 2)]
 
 
 def test_concluir_exige_todos_os_exercicios(app):
@@ -235,3 +245,11 @@ def test_excluir_conta_anonimiza_e_encerra_sessao(app, app_db):
         u = db.query(Usuario).filter_by(anonimizado=True).one()
         assert u.email.endswith("@anonimizado.invalido") and u.nome_google == "Anônimo"
         assert db.query(MovimentoPontos).filter_by(usuario_id=u.id).count() == 1  # resultado preservado
+
+
+def test_exercicio_aberto_informa_erros_ja_cometidos(app):
+    c = novo_cliente(app, "pendente@teste.dev")
+    ex = _ids(c, "1.1")
+    post(c, f"/api/exercicios/{ex[2]}/tentativas", {"resposta": "Errado"})
+    aberto = next(e for e in c.get("/api/aulas/1.1").json()["exercicios"] if e["ordem"] == 2)
+    assert not aberto["resolvido"] and aberto["erros"] == 1

@@ -1,0 +1,7 @@
+{
+  "name": "teste-e2e-front",
+  "private": true,
+  "description": "Abre as telas do protótipo com o servidor real e simula cliques (jsdom).",
+  "scripts": { "teste": "node teste_front.js" },
+  "devDependencies": { "jsdom": "^24.1.0" }
+}

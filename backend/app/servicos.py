@@ -174,28 +174,41 @@ def obter_aula(db, usuario_id: int, codigo: str) -> dict:
     if aula is None:
         raise ErroNegocio("aula_inexistente", "Aula não encontrada.", 404)
     _exigir_aula_liberada(sit, codigo)
+    movimentos = {m.referencia: m for m in db.scalars(select(MovimentoPontos).where(
+        MovimentoPontos.usuario_id == usuario_id, MovimentoPontos.referencia.like(f"{codigo}#%")))}
     exercicios = []
     resolvidos = 0
     for ex in _exercicio_da_aula(db, codigo):
         resultado = _resultado(db, usuario_id, ex.id)
+        movimento = movimentos.get(f"{codigo}#{ex.ordem}")
         item = {"id": ex.id, "ordem": ex.ordem, "tipo": ex.tipo, "enunciado": ex.enunciado,
                 "opcoes": ex.opcoes if ex.tipo == "escolha" else None,
                 "situacao": resultado.situacao if resultado else None,
-                "erros": resultado.erros if resultado else 0,
-                "resolvido": resultado is not None}
+                "erros": resultado.erros if resultado else _erros(db, usuario_id, ex.id),
+                "resolvido": resultado is not None,
+                "ganho": movimento.pontos if movimento and movimento.tipo == "ganho" else 0,
+                "perda": movimento.pontos if movimento and movimento.tipo == "perda" else 0}
         if resultado:
             resolvidos += 1
             item.update(_revelacao(ex))
         exercicios.append(item)
     concluida = codigo in sit.concluidas
     total = len(exercicios)
+    ordem_global = [a.codigo for m in sit.modulos for a in sit.aulas_por_modulo.get(m.codigo, [])]
+    posicao = ordem_global.index(codigo)
+    modulo = sit.modulo[aula.modulo_codigo]
     return {
         "codigo": aula.codigo, "titulo": aula.titulo,
-        "modulo": {"codigo": aula.modulo_codigo, "titulo": sit.modulo[aula.modulo_codigo].titulo},
+        "modulo": {"codigo": modulo.codigo, "titulo": modulo.titulo, "tem_prova": modulo.tem_prova},
         "estado": estado_aula(sit, codigo), "concluida": concluida,
         "pode_concluir": (not concluida) and total > 0 and resolvidos == total,
+        "prova_liberada": prova_liberada(sit, modulo.codigo),
+        "anterior": ordem_global[posicao - 1] if posicao > 0 else None,
+        "proxima": ordem_global[posicao + 1] if posicao + 1 < len(ordem_global) else None,
         "exercicios": exercicios,
         "placar": placar_aula(db, usuario_id, codigo),
+        "valores": {"acerto_primeira": regras.PONTOS_ACERTO_PRIMEIRA, "acerto_segunda": regras.PONTOS_ACERTO_SEGUNDA,
+                    "pular": regras.PONTOS_PULAR, "concluir": regras.XP_AULA},
     }
 
 
@@ -367,31 +380,45 @@ def sequencia(dias: set[date], hoje: date) -> int:
 
 
 def obter_trilha(db, usuario_id: int) -> dict:
+    """Tudo que a trilha, o programa e o painel precisam. As regras ficam aqui; a tela só exibe."""
     sit = situacao(db, usuario_id)
     movimentos = db.scalars(select(MovimentoPontos).where(MovimentoPontos.usuario_id == usuario_id)).all()
     ganhos = sum(m.pontos for m in movimentos if m.tipo == "ganho")
     perdas = sum(m.pontos for m in movimentos if m.tipo == "perda")
     modulos = []
+    proxima = None
     for modulo in sit.modulos:
         codigos = {a.codigo for a in sit.aulas_por_modulo.get(modulo.codigo, [])}
         g = sum(m.pontos for m in movimentos if m.tipo == "ganho" and _pertence(m.referencia, codigos, modulo.codigo))
         p = sum(m.pontos for m in movimentos if m.tipo == "perda" and _pertence(m.referencia, codigos, modulo.codigo))
+        aulas = []
+        for a in sit.aulas_por_modulo.get(modulo.codigo, []):
+            estado = estado_aula(sit, a.codigo)
+            aulas.append({"codigo": a.codigo, "titulo": a.titulo, "estado": estado,
+                          "concluida": estado == "concluida"})
+            if proxima is None and estado != "concluida":
+                proxima = {"codigo": a.codigo, "titulo": a.titulo, "modulo_codigo": modulo.codigo,
+                           "modulo_titulo": modulo.titulo}
+        prova_liberada_agora = prova_liberada(sit, modulo.codigo)
         modulos.append({
             "codigo": modulo.codigo, "titulo": modulo.titulo, "tipo": modulo.tipo, "tem_prova": modulo.tem_prova,
+            "liberado": modulo_liberado(sit, modulo.codigo),
             "estado": estado_modulo(sit, modulo.codigo),
+            "aulas_concluidas": sum(1 for a in aulas if a["concluida"]),
             "prova": None if not modulo.tem_prova else {
-                "estado": "concluida" if modulo.codigo in sit.aprovadas
-                else ("atual" if prova_liberada(sit, modulo.codigo) else "bloqueada")},
-            "aulas": [{"codigo": a.codigo, "titulo": a.titulo, "estado": estado_aula(sit, a.codigo)}
-                      for a in sit.aulas_por_modulo.get(modulo.codigo, [])],
+                "liberada": prova_liberada_agora,
+                "aprovada": modulo.codigo in sit.aprovadas,
+                "estado": "concluida" if modulo.codigo in sit.aprovadas else ("atual" if prova_liberada_agora else "bloqueada")},
+            "aulas": aulas,
             "pontos": {"ganhos": g, "perdas": p},
         })
     hoje = datetime.now(FUSO).date()
     return {
         "pontos": {"ganhos": ganhos, "perdas": perdas, "total": ganhos - perdas},
         "aulas_concluidas": len(sit.concluidas),
-        "unidades_concluidas": sum(1 for m in sit.modulos if m.tipo == "modulo" and estado_modulo(sit, m.codigo) == "concluido"),
+        "unidades_concluidas": sum(1 for m in modulos if m["tipo"] == "modulo" and m["estado"] == "concluido"),
         "sequencia": sequencia(_dias_com_atividade(db, usuario_id), hoje),
+        "proxima_aula": proxima,
         "modulos": modulos,
     }
 
