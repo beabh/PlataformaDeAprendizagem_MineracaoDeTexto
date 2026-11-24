@@ -43,6 +43,9 @@ def carregar() -> Configuracao:
         chave_cripto = base64.urlsafe_b64encode(hashlib.sha256(segredo.encode()).digest()).decode()
     if ambiente == "producao" and segredo.startswith("troque-"):
         raise RuntimeError("Defina PLN_SEGREDO_SESSAO em produção.")
+    if ambiente == "producao" and not os.environ.get("PLN_DATABASE_URL"):
+        # Em produção (Vercel, Render etc.) o disco não é persistente: o banco tem de ser externo.
+        raise RuntimeError("Defina PLN_DATABASE_URL em produção, apontando para um PostgreSQL externo.")
     url = os.environ.get("PLN_DATABASE_URL", "postgresql+psycopg://pln:pln@localhost:5432/plataforma_pln")
     if url.startswith("sqlite:///./"):
         # Caminho relativo ao backend, não à pasta de onde o servidor foi iniciado.

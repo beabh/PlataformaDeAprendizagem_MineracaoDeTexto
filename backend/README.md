@@ -112,7 +112,25 @@ node tools/exportar_dados.js
 
 ## Publicar na internet
 
-Nesta versão não há login de produção: a entrada de teste só existe com `PLN_AMBIENTE=desenvolvimento`. Antes de abrir o site para estudantes, é preciso escolher um método de login. A imagem é construída a partir da raiz do repositório:
+A entrada de teste (`/auth/desenvolvimento`) só existe com `PLN_AMBIENTE=desenvolvimento`. Em produção, o login é por e-mail e senha, com as senhas e os dados pessoais cifrados.
+
+### Vercel
+
+O repositório já está preparado para o Vercel: o arquivo `index.py` na raiz expõe o app, `vercel.json` inclui as páginas do protótipo e os JSON do catálogo no pacote, e `pyproject.toml` lista as dependências.
+
+No painel do Vercel (Settings → Environment Variables), defina:
+
+- `PLN_AMBIENTE=producao`
+- `PLN_DATABASE_URL`: URL de um PostgreSQL externo, no formato `postgresql+psycopg://usuario:senha@servidor/banco`. É obrigatório em produção, porque o disco do Vercel não guarda arquivos entre execuções.
+- `PLN_SEGREDO_SESSAO` e `PLN_CHAVE_CRIPTO`: valores longos e aleatórios. Não troque `PLN_CHAVE_CRIPTO` depois de ter dados salvos, senão os dados cifrados ficam ilegíveis.
+- `PLN_URL_PUBLICA`: o endereço do site no Vercel, usado nos links de e-mail.
+- `PLN_SMTP_HOST`, `PLN_SMTP_PORTA`, `PLN_SMTP_USUARIO`, `PLN_SMTP_SENHA` e `PLN_SMTP_REMETENTE`, de um provedor de e-mail. Sem SMTP, o cadastro funciona, mas a confirmação de e-mail e a redefinição de senha não são enviadas.
+
+Limitações conhecidas nessa forma de hospedagem: o limite de tentativas de login fica na memória de cada instância, então ele não é compartilhado entre instâncias; e cada execução a frio cria as tabelas e carrega o catálogo, o que deixa a primeira requisição um pouco mais lenta.
+
+### Docker
+
+A imagem é construída a partir da raiz do repositório:
 
 ```
 docker build -t plataforma-pln .
